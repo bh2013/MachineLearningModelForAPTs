@@ -6,10 +6,13 @@ def get(pkt):
     try: 
         packetInfo["Packet No."] = pkt.number
         packetInfo["Protocol"] = pkt.highest_layer
-        packetInfo["Source"] = pkt.ip.src
-        packetInfo["Destination"] = pkt.ip.dst
-        packetInfo["Time"] = pkt.frame_info.time_epoch
         packetInfo["Length"] = pkt.length
+        print(pkt.length)
+        # packetInfo["Source"] = pkt.ip.src
+        # packetInfo["Destination"] = pkt.ip.dst
+        # packetInfo["Time"] = pkt.frame_info.time_epoch
+        # packetInfo["Length"] = pkt.length
+        
         return packetInfo
     
     except Exception as e:
@@ -26,3 +29,10 @@ def get(pkt):
     # for layer in layers:
     #     print(layer)
     
+def calcAvgLength(totalPacketInfo):
+    totalLength = 0
+    for packet in totalPacketInfo:
+        totalLength += int(packet["Length"])
+        
+    print("Total Length: " + str(totalLength))
+    return totalLength/len(totalPacketInfo)
