@@ -45,7 +45,7 @@ def read_live_data():
 def read_CSV_data():
     try:
         # read the csv files
-        capture = pyshark.FileCapture("Midterm-Step2-Group-15.csv")
+        capture = pyshark.FileCapture("NormalNetworkData.pcap")
         
         maxPacketInfo = 10
         totalPacketInfo = collections.deque(maxlen=maxPacketInfo)
