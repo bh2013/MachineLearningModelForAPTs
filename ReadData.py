@@ -7,81 +7,81 @@ import collections
 # ---------------------z
 # files to import 
 import getPacketInfo
-import UnitTest
-
 # ---------------------
 
-def getInterfaces():
-    try:
-        address = psutil.net_if_addrs()
-        return address.keys()
-    except Exception as e:
-        print("Error: " + str(e))
-        return []
+# TODO 
+# 1. Handle differnt types of protocols
+# 2. Implement ackReplyCheck
+
+
+
+# dealing with differnt protocols, all pakcets gett added to the window, then the window is analysed
 
 
 
 
-def read_live_data():
+
+count = 0 
+def windowCount():
+    global count
+    count = count + 1
+    return count
     
-    interfaces = getInterfaces()
-    if len(interfaces) == 0 :
-       print("No interfaces found")
-    maxPacketInfo = 10
-    totalPacketInfo = collections.deque(maxlen=maxPacketInfo)
-    try:
-        def packet_callback(pkt):
-            totalPacketInfo.append(getPacketInfo.get(pkt))
-        # capture is the live session on all interfaces in list 
-        capture = pyshark.LiveCapture(list(interfaces))
-        # most effeicnet way to apply function on packets, packet_count = 0/ " " for infinite
-        capture.apply_on_packets(packet_callback, packet_count=100)
-        capture.close()
-        return totalPacketInfo
-    
-    except Exception as e:
-        print("ErrorInRead: " + str(e) )
-        
-def read_CSV_data():
-    try:
-        # read the csv files
-        capture = pyshark.FileCapture("NormalNetworkData.pcap")
-        
-        maxPacketInfo = 10
-        totalPacketInfo = collections.deque(maxlen=maxPacketInfo)
-        
-        def packetGet(pkt):
-            totalPacketInfo.append(getPacketInfo.get(pkt))
+
+def getWindowsData(window):
+    # sets first window to none
+    prevWindow = None 
+    def packetGet(pkt , window = window):
+        # sets as a non local to allow it to be changed for each windoqw
+        # important for processing previous window
+        nonlocal prevWindow   
+        # gets the packet info and removes any info that isnt needed 
+        pkt = getPacketInfo.get(pkt)
+        # adds the packet to the current window
+        window.append(pkt)
+        # if window is full then analyze the window
+        if len(window) == window.maxlen:
+            # gets the number of windows
+            count = int(windowCount())
             
-        print()
-        
-        capture.apply_on_packets(packetGet,packet_count=100)
-        
-        calcAvgLength = getPacketInfo.calcAvgLength(totalPacketInfo)
-        print("Average Length: " + str(int(calcAvgLength)))            
-        capture.close()
-        
-        
-        return totalPacketInfo
-        
-    except Exception as e:
-        print("ErrorInRead: " + str(e))
-        return []
+            # if its 1 its the first widnow so no previous, only analyse the current window
+            # !important as can catch problems on start, eg first packet doing something malicious
+            # ?mayne this isnt needed tho, should be able to catch soemthing suspicious in the first window when sent to ML model
+            # Take note of this 
+            if count == 1:
+                print("First Window, can't compare to previous")
+                analysis = analyzeWindow(prevWindow,window)
+                prevWindow = window.copy()
+                window.clear()
+                return
+            else:
+                # otherwise both windows are wanting to be used for comparisons to be made 
+                analysis = analyzeWindow(prevWindow,window)
+                prevWindow = window.copy()
+            window.clear()
+    return packetGet
 
-        
-        
-        
-    
-
+def analyzeWindow(prevWindow,window):
+# checks if the window is the first window
+    protocolList = {}
+    if prevWindow == None:
+        protocolList = getPacketInfo.protocolList(window)
+        packetRate = getPacketInfo.packetRate(window)
+    else:    
+        average = getPacketInfo.windowAveragePacketLength(window)
+        prevAverage = getPacketInfo.windowAveragePacketLength(prevWindow)
+        deviation = getPacketInfo.windowDeviationPacketLength(window)
+        protocolList = getPacketInfo.protocolList(window)
+        protocolListPrev = getPacketInfo.protocolList(prevWindow)
 
 # main function
 if __name__ == "__main__":
-    # packetInfo = read_live_data()
-    packetInfo = read_CSV_data()
-    
-    # formatedPacketInfo = FormatDataPackets.formatPackets(packetInfo)
-    # ScanPorts.scanPorts()
-    
+    maxWindow = 1000
+    windowDataInfo = collections.deque(maxlen=maxWindow)
+    capture = pyshark.FileCapture("NormalNetworkData.pcap")
+    window = getWindowsData(windowDataInfo)
+    capture.apply_on_packets(window,packet_count=10000)
+    capture.close()
     
     
     
