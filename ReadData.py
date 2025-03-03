@@ -1,5 +1,7 @@
 #This file will act as a wireshark to run and read the data in real time 
 
+# Pcap file with Industrial/scada rules https://www.netresec.com/?page=PCAP4SICS, 4SICS-GeekLounge-151022.pcap, 4SICS-GeekLounge-151021, 4SICS-GeekLounge-151020.pcap
+
 # Libriaries 
 import psutil
 import pyshark
@@ -14,12 +16,7 @@ import getPacketInfo
 # 2. Implement ackReplyCheck
 
 
-
 # dealing with differnt protocols, all pakcets gett added to the window, then the window is analysed
-
-
-
-
 
 count = 0 
 def windowCount():
@@ -38,6 +35,8 @@ def getWindowsData(window):
         pkt = getPacketInfo.get(pkt)
         # adds the packet to the current window
         window.append(pkt)
+        
+        
         # if window is full then analyze the window
         if len(window) == window.maxlen:
             # gets the number of windows
@@ -50,12 +49,14 @@ def getWindowsData(window):
             if count == 1:
                 # !First Window, can't compare to previous
                 analysis = analyzeWindow(prevWindow,window)
+                print(analysis)
                 prevWindow = window.copy()
                 window.clear()
                 return
             else:
                 # otherwise both windows are wanting to be used for comparisons to be made 
                 analysis = analyzeWindow(prevWindow,window)
+                print(analysis)
                 prevWindow = window.copy()
             window.clear()
     return packetGet
@@ -63,24 +64,30 @@ def getWindowsData(window):
 def analyzeWindow(prevWindow,window):
 # checks if the window is the first window
     if prevWindow == None:
+        average = getPacketInfo.windowAveragePacketLength(window)
         protocolList = getPacketInfo.protocolList(window)
         packetRate = getPacketInfo.packetRate(window)
+        deviation = getPacketInfo.windowDeviationPacketLength(window)
         AckReplyCheck = getPacketInfo.ackReplyCheck(window)
+        return average,protocolList,packetRate,deviation,AckReplyCheck
     else:    
         average = getPacketInfo.windowAveragePacketLength(window)
-        prevAverage = getPacketInfo.windowAveragePacketLength(prevWindow)
-        deviation = getPacketInfo.windowDeviationPacketLength(window)
         protocolList = getPacketInfo.protocolList(window)
-        protocolListPrev = getPacketInfo.protocolList(prevWindow)
+        packetRate = getPacketInfo.packetRate(window)
+        deviation = getPacketInfo.windowDeviationPacketLength(window)
         AckReplyCheck = getPacketInfo.ackReplyCheck(window)
-
+        
+        return average,protocolList,packetRate,deviation,AckReplyCheck
+        
 # main function
 if __name__ == "__main__":
-    maxWindow = 5
+# ?Can be changed to just capture on an interface, but for now just using a file
+    maxWindow = 5000
     windowDataInfo = collections.deque(maxlen=maxWindow)
-    capture = pyshark.FileCapture("FileData/NormalNetworkData.pcap")
+    capture = pyshark.FileCapture("FileData/4SICS-GeekLounge-151022.pcap")
     window = getWindowsData(windowDataInfo)
-    capture.apply_on_packets(window,packet_count=100)
+    # !set to 0 to make constant
+    capture.apply_on_packets(window,packet_count=300000)
     capture.close()
     
     

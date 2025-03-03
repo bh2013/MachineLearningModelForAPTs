@@ -1,4 +1,20 @@
+import TCP_Analysis
+
 def get(pkt):
+    
+    
+    # !Protocol List
+    # TCP - Transmission Control Protocol - used for sending data, waatch for acks and replies ensuring there is no overloading of either 
+    # UDP - User Datagram Protocol - used for sending data, check for suspicious data being sent
+    # ICMP - Internet Control Message Protocol - used for sending error messages, check for suspicious data being sent
+    # ARP - Address Resolution Protocol - used for mapping IP addresses to MAC addresses, check for suspicious malipulation of destonations
+    # DNS - Domain Name System - used for translating domain names to IP addresses, check for suspicious data being sent
+    # S7COMM - Siemens S7 Communication - used for communication with Siemens PLCs(industrial unit control) , check for any possibel tampering and unauthorised access
+    # Modbus - Modbus Protocol - used for data transfer with PLCs, check for altered data being sent or any possibel tampering
+    
+    
+    
+    
     # Get the packet info 
     # (pkt.frame_info)- for general info: packet time, interface name etc
     # set all usefull info into a dictionary
@@ -10,43 +26,27 @@ def get(pkt):
         packetInfo["Time"] = pkt.frame_info.time_epoch
         
         if pkt.highest_layer == "TCP":
-            TCP_Packet(packetInfo, pkt)
+            TCP_Analysis.TCP_Packet(packetInfo, pkt)
         
         return packetInfo
     except Exception as e:
         print("ErrorInPacketInfo: " + str(e))
         return packetInfo
     
-    
-def TCP_Packet(packetInfo, pkt):
-    try:
-        packetInfo["Source"] = pkt.IP.src
-        packetInfo["Destination"] = pkt.IP.dst
-        packetInfo["Source Port"] = pkt.TCP.srcport
-        packetInfo["Destination Port"] = pkt.TCP.dstport
-        # if (pkt.TCP.analysis_acks_frame) and pkt.TCP.analysis_acks_frame is not None
-        if hasattr(pkt.TCP, "analysis_acks_frame"):
-            flags = pkt.TCP.flags,
-            frame = pkt.TCP.analysis_acks_frame
-            packetInfo["Flags"] = flags,frame
-            
-        else:
-            packetInfo["Flags"] = pkt.TCP.flags
-            
-    except Exception as e:
-        print("ErrorInTCPPacket: " + str(e))
-        return packetInfo
-    
+
+
 def UDP_Packet(packetInfo, pkt):
     pass
         
-    
 def windowAveragePacketLength(window):
     totalPacketLength = 0
     for packet in window:
         totalPacketLength += int(packet["Length"])
-    return totalPacketLength/len(window)
-
+    average = totalPacketLength/len(window)
+    normalAVG = int(average)
+    average = normalAVG - average
+    average = average * 1000
+    return average
 
 def protocolList(window):
     # ?normalises the protocol count data into percentages
@@ -63,6 +63,7 @@ def protocolList(window):
     return protocolCount
         
 def windowDeviationPacketLength(window):
+    # ?Uses Welford's algorithm to calc standard deviation
     n = 0
     mean = 0.0
     M2 = 0.0
@@ -77,15 +78,37 @@ def windowDeviationPacketLength(window):
         return 0.0
     return M2 / (n - 1)  
 
-# TODO: Implement ackReplyCheck
-def ackReplyCheck(window):
-    # check if the packet is an ack or a reply
-    pass
-    # for packet in window:
-    #     if ("Flags" not in packet):
-    #         print("No Flags")
-    #         return
+def ackReplyCheck(window, MaxSynCount = 1000, ratioThreshold = 0.5):
+    synCount = 0 
+    synAckCount = 0
+
+    for packet in window:
+        if "Flags" not in packet:
+            continue
+        if "SYN Flag" not in packet or "ACK Flag" not in packet:
+            continue
+        
+        if packet["SYN Flag"]==1 and packet["ACK Flag"] == 0:
+            synCount += 1
+        
+        if packet["SYN Flag"]==1 and packet["ACK Flag"] == 1:
+            synAckCount += 1
             
+
+    if synCount < 0 : return 0
+    if synAckCount  < 1 : return 0
+    
+    synAckRatio = synAckCount/synCount
+    print(synAckRatio)
+
+    if synCount > MaxSynCount and synAckRatio < ratioThreshold:
+        return 1
+    else:
+        return 0
+
+                    
+   
+
     #     if(packet["Flags"] == "0x0010"): # ACK
     #         print("ACK")
     #         print(packet["Flags"])
@@ -107,6 +130,8 @@ def ackReplyCheck(window):
 def packetRate(window):
     if not window:
         return 0
+    if len(window) == 1:
+        return 1
     startTime = float(window[0]["Time"])
     for pktTime in window:
         pktTime = float(pktTime["Time"])
