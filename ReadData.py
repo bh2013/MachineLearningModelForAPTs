@@ -27,7 +27,6 @@ def windowCount():
     count = count + 1
     return count
     
-
 def getWindowsData(window):
     # sets first window to none
     prevWindow = None 
@@ -43,13 +42,13 @@ def getWindowsData(window):
         if len(window) == window.maxlen:
             # gets the number of windows
             count = int(windowCount())
-            
             # if its 1 its the first widnow so no previous, only analyse the current window
             # !important as can catch problems on start, eg first packet doing something malicious
             # ?mayne this isnt needed tho, should be able to catch soemthing suspicious in the first window when sent to ML model
             # Take note of this 
+            
             if count == 1:
-                print("First Window, can't compare to previous")
+                # !First Window, can't compare to previous
                 analysis = analyzeWindow(prevWindow,window)
                 prevWindow = window.copy()
                 window.clear()
@@ -63,24 +62,25 @@ def getWindowsData(window):
 
 def analyzeWindow(prevWindow,window):
 # checks if the window is the first window
-    protocolList = {}
     if prevWindow == None:
         protocolList = getPacketInfo.protocolList(window)
         packetRate = getPacketInfo.packetRate(window)
+        AckReplyCheck = getPacketInfo.ackReplyCheck(window)
     else:    
         average = getPacketInfo.windowAveragePacketLength(window)
         prevAverage = getPacketInfo.windowAveragePacketLength(prevWindow)
         deviation = getPacketInfo.windowDeviationPacketLength(window)
         protocolList = getPacketInfo.protocolList(window)
         protocolListPrev = getPacketInfo.protocolList(prevWindow)
+        AckReplyCheck = getPacketInfo.ackReplyCheck(window)
 
 # main function
 if __name__ == "__main__":
-    maxWindow = 1000
+    maxWindow = 5
     windowDataInfo = collections.deque(maxlen=maxWindow)
-    capture = pyshark.FileCapture("NormalNetworkData.pcap")
+    capture = pyshark.FileCapture("FileData/NormalNetworkData.pcap")
     window = getWindowsData(windowDataInfo)
-    capture.apply_on_packets(window,packet_count=10000)
+    capture.apply_on_packets(window,packet_count=100)
     capture.close()
     
     

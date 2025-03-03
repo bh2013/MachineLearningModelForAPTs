@@ -10,15 +10,36 @@ def get(pkt):
         packetInfo["Time"] = pkt.frame_info.time_epoch
         
         if pkt.highest_layer == "TCP":
-            packetInfo["Source"] = pkt.IP.src
-            packetInfo["Destination"] = pkt.IP.dst
-            packetInfo["Source Port"] = pkt.TCP.srcport
-            packetInfo["Destination Port"] = pkt.TCP.dstport
-            packetInfo["Flags"] = pkt.TCP.flags
+            TCP_Packet(packetInfo, pkt)
+        
         return packetInfo
     except Exception as e:
         print("ErrorInPacketInfo: " + str(e))
         return packetInfo
+    
+    
+def TCP_Packet(packetInfo, pkt):
+    try:
+        packetInfo["Source"] = pkt.IP.src
+        packetInfo["Destination"] = pkt.IP.dst
+        packetInfo["Source Port"] = pkt.TCP.srcport
+        packetInfo["Destination Port"] = pkt.TCP.dstport
+        # if (pkt.TCP.analysis_acks_frame) and pkt.TCP.analysis_acks_frame is not None
+        if hasattr(pkt.TCP, "analysis_acks_frame"):
+            flags = pkt.TCP.flags,
+            frame = pkt.TCP.analysis_acks_frame
+            packetInfo["Flags"] = flags,frame
+            
+        else:
+            packetInfo["Flags"] = pkt.TCP.flags
+            
+    except Exception as e:
+        print("ErrorInTCPPacket: " + str(e))
+        return packetInfo
+    
+def UDP_Packet(packetInfo, pkt):
+    pass
+        
     
 def windowAveragePacketLength(window):
     totalPacketLength = 0
@@ -28,6 +49,7 @@ def windowAveragePacketLength(window):
 
 
 def protocolList(window):
+    # ?normalises the protocol count data into percentages
     protocolCount = {}
     for packet in window:
         if packet["Protocol"] in protocolCount:
@@ -38,7 +60,6 @@ def protocolList(window):
     for protocol in protocolCount:
         protocolCount[protocol] = protocolCount[protocol]/len(window)
     
-    print(protocolCount)
     return protocolCount
         
 def windowDeviationPacketLength(window):
@@ -59,6 +80,24 @@ def windowDeviationPacketLength(window):
 # TODO: Implement ackReplyCheck
 def ackReplyCheck(window):
     # check if the packet is an ack or a reply
+    pass
+    # for packet in window:
+    #     if ("Flags" not in packet):
+    #         print("No Flags")
+    #         return
+            
+    #     if(packet["Flags"] == "0x0010"): # ACK
+    #         print("ACK")
+    #         print(packet["Flags"])
+    #     elif(packet["Flags"] == "0x0011"): # Fin and PSH
+    #         print("ACK and PSH")
+    #         print(packet["Flags"])
+    #     elif(packet["Flags"] == "0x0012"):
+    #         print("ACK and SYN")
+    #         print(packet["Flags"])
+        
+    
+    
     # if the packet is an ack, check if it is a reply to a packet in the window if not check in previous window 
     # if the packet is a reply, check if it is a reply to a packet in the previous window or this widnow
     # if the packet is neither, check if it is a new packet 
