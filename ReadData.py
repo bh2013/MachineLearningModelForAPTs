@@ -20,8 +20,6 @@ import getPacketInfo
 # 5.Entropy Score for Data Payloads
 
 
-
-
 count = 0 
 def windowCount():
     global count

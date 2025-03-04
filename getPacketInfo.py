@@ -11,19 +11,7 @@ def get(pkt):
     # ?S7COMM - Siemens S7 Communication - used for communication with Siemens PLCs(industrial unit control) , check for any possibel tampering and unauthorised access
     # ?Modbus - Modbus Protocol - used for data transfer with PLCs, check for altered data being sent or any possibel tampering    
     
-    
-    
-    # verage Packet Length	✅ Implemented	-
-    # Deviation of Packet Length	✅ Implemented (log-normalized)	-
-    # Packet Rate	⚠️ Broken calculation	✅ Fix ΔT calculations
-    # Protocol Distribution (TCP, DNS, etc.)	✅ Implemented	-
-    # TCP Flag Distribution (SYN%, PSH%, RST%)	✅ Implemented	-
-    # SYN Flood Detection (SYN/ACK ratio)	✅ Implemented	-
-    # PSH% (Potential Exfiltration)	✅ Implemented	-
-    # DNS Query Frequency (Potential Tunneling)	❌ Missing	✅ Implement
-    # Out-of-Order Packets Ratio	❌ Missing	✅ Implement
-    # Retransmission Rate	❌ Missing	✅ Implement
-    # Entropy Score for Data Payloads	❌ Missing	✅ Implement
+
     
     
     
