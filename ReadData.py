@@ -9,15 +9,16 @@ import collections
 # ---------------------z
 # files to import 
 import getPacketInfo
+import TCP_Analysis
+import DNS_Analysis
+import ipList
 # ---------------------
 
 # TODO 
-
-# 1.Packet Rate - Fix ΔT calculations
 # 2.DNS Query Frequency (Potential Tunneling)	
-# 3.Out-of-Order Packets Ratio	
 # 4.Retransmission Rate	
-# 5.Entropy Score for Data Payloads
+# 6.Record all the IP addresses and ports that the device is communicating with, from the pcap file site 
+# 7/ Make get packetData more efficient, and add more protocols
 
 
 count = 0 
@@ -38,8 +39,7 @@ def getWindowsData(window):
         # adds the packet to the current window
         window.append(pkt)
         
-        
-        # if window is full then analyze the window
+        # if window is full then analyse the window
         if len(window) == window.maxlen:
             # gets the number of windows
             count = int(windowCount())
@@ -47,7 +47,6 @@ def getWindowsData(window):
             # !important as can catch problems on start, eg first packet doing something malicious
             # ?mayne this isnt needed tho, should be able to catch soemthing suspicious in the first window when sent to ML model
             # Take note of this 
-            
             if count == 1:
                 # !First Window, can't compare to previous
                 analysis = analyzeWindow(prevWindow,window)
@@ -66,29 +65,44 @@ def getWindowsData(window):
 def analyzeWindow(prevWindow,window):
 # checks if the window is the first window
     if prevWindow == None:
+        #Average packet length
         averagePacketLength = getPacketInfo.windowAveragePacketLength(window)
+        #Lists all protocols and returns them as perctages 
         protocolList = getPacketInfo.protocolList(window)
-        packetRate = getPacketInfo.packetRate(window)
+        #Gets stats on the rates of packets, packets rate, window length, entropy of the window's packet intervals  
+        FlowStats = getPacketInfo.packetRate(window)
+        # ?gets the standard deviation of the packet length, not sure if usefull 
         deviationOfPacketLength = getPacketInfo.windowDeviationPacketLength(window)
-        tcpAnalysis = getPacketInfo.ackReplyCheck(window)
-        return averagePacketLength,protocolList,packetRate,deviationOfPacketLength,tcpAnalysis
+        outOfOrderPacketRatio = getPacketInfo.outOfOrderPacketCount(window)
+        # if the packet is tcp then check its flags, and replies, if tcpAnalysisSYNAttack is 1 then its a SYN attack
+        tcpAnalysisSYNAttack,tcpAnalysisFlagDistrabution = TCP_Analysis.ackReplyCheck(window)
+        unkownIps = getPacketInfo.knownIpCheck(window)
+
+        return averagePacketLength,outOfOrderPacketRatio,FlowStats,tcpAnalysisSYNAttack,protocolList,tcpAnalysisFlagDistrabution,unkownIps
     else:    
         averagePacketLength = getPacketInfo.windowAveragePacketLength(window)
         protocolList = getPacketInfo.protocolList(window)
-        packetRate = getPacketInfo.packetRate(window)
+        FlowStats = getPacketInfo.packetRate(window)
         deviationOfPacketLength = getPacketInfo.windowDeviationPacketLength(window)
-        tcpAnalysisSYNAttack,tcpAnalysisFlagDistrabution = getPacketInfo.ackReplyCheck(window)
-        return averagePacketLength,protocolList,packetRate,deviationOfPacketLength,tcpAnalysisSYNAttack,tcpAnalysisFlagDistrabution
+        outOfOrderPacketRatio = getPacketInfo.outOfOrderPacketCount(window)
+        tcpAnalysisSYNAttack,tcpAnalysisFlagDistrabution = TCP_Analysis.ackReplyCheck(window)
+        unkownIps = getPacketInfo.knownIpCheck(window)
+
+        allVars = averagePacketLength,deviationOfPacketLength,outOfOrderPacketRatio,FlowStats,tcpAnalysisSYNAttack,protocolList,tcpAnalysisFlagDistrabution,unkownIps
+        
+        return allVars
         
 # main function
 if __name__ == "__main__":
 # ?Can be changed to just capture on an interface, but for now just using a file
-    maxWindow = 5000
+
+    allowedDomains = {}
+    maxWindow = 1000
     windowDataInfo = collections.deque(maxlen=maxWindow)
-    capture = pyshark.FileCapture("FileData/4SICS-GeekLounge-151020.pcap")
+    capture = pyshark.FileCapture("FileData/4SICS-GeekLounge-151021.pcap")
     window = getWindowsData(windowDataInfo)
     # !set to 0 to make constant or just choose a big number, less than the size of pcap file 
-    capture.apply_on_packets(window,packet_count=30000)
+    capture.apply_on_packets(window,packet_count=15000)
     capture.close()
     
     
