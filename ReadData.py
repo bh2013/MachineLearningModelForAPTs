@@ -15,6 +15,7 @@ import Analysis.TCP_Analysis as TCP_Analysis
 import Analysis.ICMP_Analysis as ICMP_Analysis
 import Analysis.ARP_Analysis as ARP_Analysis
 import Analysis.DNS_Analysis as DNS_Analysis
+import Analysis.S7_Analysis as S7_Analysis
 # ---------------------
 
 # TODO - what needs to be analysed
@@ -164,7 +165,7 @@ def analyseWindow(window):
     
     # !S7COMM Analysis of window
     suspiciousActivityFlag = 0
-    
+    s7functions = S7_Analysis.S7StartProtocolCount(window) 
     
     # !Modbus Analysis of window
     modbusActivityFlag = 0
