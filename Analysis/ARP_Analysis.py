@@ -1,6 +1,5 @@
 from Analysis import ipList
 
-
 def ARP_Packet(packetInfo, pkt):
     try:
         packetInfo["Operation"] = pkt.arp.opcode
@@ -9,13 +8,12 @@ def ARP_Packet(packetInfo, pkt):
         packetInfo["SourceIP"] = pkt.arp.src_proto_ipv4
         packetInfo["DestinationIP"] = pkt.arp.dst_proto_ipv4
         return packetInfo
-    
+
     except Exception as e:
         print("ErrorInARPPacket: " + str(e))
         return packetInfo
     
     
-     
 def ReplyRequestDiffernce(window):
     request = 0
     reply = 0

@@ -9,13 +9,18 @@ import pyshark
 import collections
 # ---------------------z
 # files to import 
-from Analysis import AveragePacketLength, DeviationOfPacketLength, FlowStats, IpCheck, OutOfOrderPackets, ProtocolList
+import Analysis.General_Analysis as General_Analysis
 import Analysis.getPacketInfo as getPacketInfo
 import Analysis.TCP_Analysis as TCP_Analysis
 import Analysis.ICMP_Analysis as ICMP_Analysis
 import Analysis.ARP_Analysis as ARP_Analysis
 import Analysis.DNS_Analysis as DNS_Analysis
 import Analysis.S7_Analysis as S7_Analysis
+import Analysis.Modbus_Analysis as Modbus_Analysis
+import DataVisualisation
+import FormatData
+import IsolationForrest
+
 # ---------------------
 
 # TODO - what needs to be analysed
@@ -24,46 +29,53 @@ import Analysis.S7_Analysis as S7_Analysis
 # ?1. Average Packet Length
 # ?2. Deviation of Packet Length
 # ?3. Out of Order Packet count
-# ?5. packetRate
+# ?6. Unkown Ip list
+# ?7. Protocol List
+# ?8. Min Max Packet Length
 
 # ? Flow Stats
-# ?6. total duration of window
-# ?7. mean time difference between packets
-# ?8. standard deviation between packets
-# ?10. Entropy of the time between packets
+# ?9. total duration of window
+# ?10. mean time difference between packets
+# ?11. standard deviation between packets
+# ?12. Entropy of the time between packets
 
-# ?Protocol Specific
-# ?11. 1 or 0 if SYN attack w/ TCP
-# ?12. Protocol List w/ ratios 
-# ?13. Flag distrabution of TCP packets
-# ?14. Known IP check, 0 if all known, count how many unkown ips
-
-#TODO - what needs to be added
-#?Gernal Stats needing recorded
+# !Protocol specific stats
+# ?TCP Stats
+# ?1. SYN Attack Detection
+# ?2. Flag Distribution
+# ?3. Average Time between packets
 
 #?DNS Stats 
-#?1. DNS Query Rate
-#?2. DNS Response Rate
+#?1. DNS Query Rate per second
+#?2. DNS Response Count
 #?3. DNS Query Length
-#?4. DNS Response Length
 
 # ?ARP Stats
-# ?1. ARP Response
+# ?1. ARP ReplyRequest Differnce
+# ?2. ARP Spoof Flag
+# ?3. Unkown IP Flag
 
 # ?ICMP Stats
-# ?1. ICMP ratio, high is suspicius
+# ?1. Average Time to Live 
+# ?2. ICMP Response Ratio
+# ?3. ICMP Round Trip(request/Reply) averages
+# ?4. ICMP Type Ratios
+# ?5. ICMP Type checks (redirects, unreachable)
+# ?6. ICMP Fragmentation Check
 
-#?Data in out tracker, any data in or out of the network
-#?1. Data in Rate
-#?2. Data out Rate
+# ?S7COMM Stats
+# ?1. PLC Communication Count
+# ?2. S7 Start Protocol Count
 
-# ?ICS Protocols
-#?Modbus, S7COMM, 
+# ?Modbus Stats
+# ?1. Modbus Count
+# ?2. Function Distribution
+# ?3. Read/write Ratio
+# ?4. Error Count
+# ?5. Memory Register Checks
+# ?6. Modbus Time Stats
 
 
-
-# 4.Retransmission Rate	
-# 7/ Make get packetData more efficient, and add more protocols
 
 count = 0 
 def windowCount():
@@ -97,18 +109,20 @@ def getWindowsData(window):
             if count == 1:
                 # !First Window, can't compare to previous
                 analysis = analyseWindow(window)
-                print(analysis)
+                formatedData = FormatData.Format(analysis)
+                DataVisualisation.displayData(formatedData)
+                
                 prevWindow = window.copy()
                 window.clear()
                 return
             else:
                 # otherwise both windows are wanting to be used for comparisons to be made 
                 analysis = analyseWindow(window)
-                print(analysis)
+                formatedData = FormatData.Format(analysis)
+                DataVisualisation.displayData(formatedData)
+
                 prevWindow = window.copy()
             window.clear()
-            
-        
             
     return packetGet
 
@@ -117,28 +131,29 @@ def analyseWindow(window):
     if not window:
         return None
         #Average packet length
-    
+
     # !General Stats from window
-    averagePacketLength = AveragePacketLength.windowAveragePacketLength(window)
+    averagePacketLength = General_Analysis.windowAveragePacketLength(window)
     #Lists all protocols and returns them as perctages 
-    protocolList = ProtocolList.protocolList(window)
+    protocolList = General_Analysis.protocolList(window)
     #Gets stats on the rates of packets, packets rate, window length, entropy of the window's packet intervals  
-    flowStats = FlowStats.packetRate(window)
+    flowStats = General_Analysis.packetRate(window)
     # ?gets the standard deviation of the packet length, not sure if usefull 
-    deviationOfPacketLength = DeviationOfPacketLength.windowDeviationPacketLength(window)
-    
-    outOfOrderPacketRatio = OutOfOrderPackets.outOfOrderPacketCount(window)
+    deviationOfPacketLength = General_Analysis.windowDeviationPacketLength(window)
+    outOfOrderPacketRatio = General_Analysis.outOfOrderPacketCount(window)
+    minMaxPacketLength = General_Analysis.MinMaxLength(window)
     # checks for any unkown src or dst ips in the window
-    unkownIps = IpCheck.knownIpCheck(window)
+    unkownIps = General_Analysis.knownIpCheck(window)
     
-    GeneralStats = averagePacketLength,deviationOfPacketLength,outOfOrderPacketRatio,flowStats,protocolList,unkownIps
+    GeneralStats = averagePacketLength,deviationOfPacketLength,minMaxPacketLength,outOfOrderPacketRatio,flowStats,protocolList,unkownIps
     
+    allVars = []
     # !TCP Analysis of window 
     # if the packet is tcp then check its flags, and replies, if tcpAnalysisSYNAttack is 1 then its a SYN attack
+    
     tcpAnalysisSYNAttack,tcpAnalysisFlagDistrabution = TCP_Analysis.ackReplyCheck(window)
-    
     tcpAnalysis =  tcpAnalysisSYNAttack,tcpAnalysisFlagDistrabution 
-    
+        
     # !ICMP Analysis of window
     ICMPReplyRatio = ICMP_Analysis.ResponseRatio(window)
     Typeratio = ICMP_Analysis.typeRatios(window)
@@ -146,40 +161,44 @@ def analyseWindow(window):
     FragmentationCheck = ICMP_Analysis.fragmentationCheck(window)
     RedirectRaio,UnreachableRatio = ICMP_Analysis.TypeChecks(window)    
     # ICMPRoundTripAnalysis = ICMP_Analysis.RoundTrips(window) - no round trips in data set, always 0 
-
-    ICMPAnalysis = ICMPReplyRatio,RedirectRaio,UnreachableRatio, Typeratio, TTLAvg, FragmentationCheck
-    
+    ICMPAnalysis = ICMPReplyRatio, RedirectRaio, UnreachableRatio, Typeratio, TTLAvg, FragmentationCheck
+    allVars.append(ICMPAnalysis)
     
     # !ARP Analysis of window
     arpReplyRequestDiff = ARP_Analysis.ReplyRequestDiffernce(window)
     arpSpoofFlag = ARP_Analysis.DetectARPSpoof(window)
-    
     ARPAnalysis = arpReplyRequestDiff,arpSpoofFlag
+
     
     
     # !DNS Analysis of window
     dnsQueryRate = DNS_Analysis.DNSQueryRatePerSecond(window)
     DNSQueryRatePerSecond = DNS_Analysis.DNSResponse(window)
-
     DNSAnalysis = dnsQueryRate,DNSQueryRatePerSecond
+
     
     # !S7COMM Analysis of window
-    suspiciousActivityFlag = 0
+    plcCommCount = S7_Analysis.plcCommCount(window)
     s7functions = S7_Analysis.S7StartProtocolCount(window) 
+    S7Anlysis = plcCommCount,s7functions
     
     # !Modbus Analysis of window
-    modbusActivityFlag = 0
+    modbusCount = Modbus_Analysis.modbusCounter(window)
+    functionDis = Modbus_Analysis.codeDistribution(window)
+    ratio = Modbus_Analysis.readWriteRatio(window)
+    regCheck = Modbus_Analysis.memoryRegisterChecks(window)
+    modbusTimeStats = Modbus_Analysis.TimeChecks(window)
+    ModbusAnalysis = modbusCount,functionDis,ratio,regCheck,modbusTimeStats
     
     # !Return all the variables
     
+    return GeneralStats,tcpAnalysis,ARPAnalysis,DNSAnalysis,ICMPAnalysis,S7Anlysis,ModbusAnalysis
     
-    # return GeneralStats,tcpAnalysis,ICMPAnalysis,ARPAnalysis
-    return GeneralStats,tcpAnalysis,DNSAnalysis,ARPAnalysis,ICMPAnalysis
+    
     
 def timeBasedWindowAnalysis(pkt):
     window = collections.deque()
     packet = getPacketInfo.get(pkt)
-    
     window.append(packet)    
         
     
@@ -188,15 +207,16 @@ def timeBasedWindowAnalysis(pkt):
 if __name__ == "__main__":
 # ?Can be changed to just capture on an interface, but for now just using a file
     maxWindow = 5000
-    windowDataInfo = collections.deque(maxlen=maxWindow)    
-    capture = pyshark.FileCapture("FileData/4SICS-GeekLounge-151022.pcap")
+    windowDataInfo = collections.deque(maxlen=maxWindow)
+    capture = pyshark.FileCapture("FileData/clean-6h.pcap")
     window = getWindowsData(windowDataInfo)
     # !set to 0 to make constant or just choose a big number, less than the size of pcap file 
-    capture.apply_on_packets(window,packet_count=100000)
+    capture.apply_on_packets(window,packet_count=0)
     capture.close()
  
     # windowDataInfo = collections.deque()    
     # capture = pyshark.FileCapture("FileData/4SICS-GeekLounge-151020.pcap")
+
     # capture.apply_on_packets(timeBasedWindowAnalysis)
     
     

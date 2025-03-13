@@ -5,6 +5,7 @@ import Analysis.TCP_Analysis as TCP_Analysis
 import Analysis.DNS_Analysis as DNS_Analysis
 import Analysis.ARP_Analysis as ARP_Analysis
 import Analysis.ICMP_Analysis as ICMP_Analysis
+import Analysis.Modbus_Analysis as Modbus_Analysis
 
 def get(pkt):
     # !Protocol List
@@ -26,6 +27,7 @@ def get(pkt):
         packetInfo["Length"] = pkt.length
         packetInfo["Time"] = pkt.frame_info.time_epoch
         
+        
         if(hasattr(pkt,"ip")):
             packetInfo["Source"] = pkt.ip.src
             packetInfo["Destination"] = pkt.ip.dst
@@ -40,8 +42,8 @@ def get(pkt):
             DNS_Analysis.DNS_Packet(packetInfo, pkt)
         elif pkt.highest_layer == "S7COMM":
             S7_Analysis.S7_Packet(packetInfo, pkt) 
-        elif pkt.highest_layer == "Modbus":
-            pass
+        elif pkt.highest_layer == "MODBUS":
+            Modbus_Analysis.Modbus_Packet(packetInfo, pkt)
         return packetInfo
     
     

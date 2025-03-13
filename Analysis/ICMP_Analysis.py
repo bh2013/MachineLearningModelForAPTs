@@ -31,6 +31,9 @@ def TTLAvg(window):
             ICMPCount += 1
             TTLCount += float(packet["TimeToLive"])
             
+    if ICMPCount == 0:
+        return 0
+    
     avgTTL = TTLCount / ICMPCount
     return avgTTL
 

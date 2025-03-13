@@ -1,19 +1,26 @@
 def S7_Packet(packetInfo, pkt):
     try:
         packetInfo["Function"] = str(pkt.S7COMM.header_protid)
-                
 
+        packetInfo["Destination"] = pkt.ip.dst
+        
+
+        
     except Exception as e:
         print("ErrorInS7Packet: " + str(e))
     return packetInfo
     
-    
-def JobRatio(window):
+# !Counts the number of unique destination IPs in the window, used to check for multiple PLCs, if sudden spike or gradual should notice its not noral that theres a new ip 
+def plcCommCount(window):
+    destinationList = []
     for packet in window:
         if packet["Protocol"] == "S7COMM":
-            pass
-        
-        
+            if packet["Destination"] not in destinationList:
+                destinationList.append(packet["Destination"])
+
+    return len(destinationList)
+
+# !Checks the counts of the different S7 functions in the window
 def S7StartProtocolCount(window):
     # readCount #0x01
     # writeCount #0x05
@@ -49,12 +56,18 @@ def S7StartProtocolCount(window):
                 else:
                     functionList[packet["Function"]] += 1
 
+
+    if functionList["ReadCount"] == 0 or functionList["writeCount"] == 0:
+        readWriteRatio = 0
+    else:
+        readWriteRatio = packet["ReadCount"] / packet["writeCount"]
     
+
     removedNames = ["ReadCount","writeCount","startCount","stopCount","PLcount"]
     returnedList =[]
     for name in removedNames:
         returnedList.append(functionList[name])
         del functionList[name]
 
-    print(returnedList)
-    return returnedList
+
+    return returnedList,readWriteRatio

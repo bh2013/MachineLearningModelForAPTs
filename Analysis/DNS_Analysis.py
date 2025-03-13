@@ -1,3 +1,5 @@
+
+# ! extra packet info
 def DNS_Packet(packetInfo, pkt):
     try:
         # print(dir(pkt.DNS))
