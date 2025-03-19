@@ -1,0 +1,116 @@
+Timestamp,Window,Anomaly Description,Value,Possible Reason
+19/03/2025 20:03:29,54,"Modbus Traffic Suspiciously Low, Possible DoS",34
+19/03/2025 20:03:29,54,"Modbus Code Other High, Possible Modbus Attack",1.0
+19/03/2025 20:03:29,54,"Modbus Register 0 High, Possible Modbus Attack",1.0
+19/03/2025 20:03:29,54,"Modbus Register 3 High, Possible flood on Register ",1.0
+19/03/2025 20:03:30,55,"Modbus Read Write Ratio Suspiciously High, Possible Modbus Attack",0.176056338028169
+19/03/2025 20:03:30,55,"Modbus Register 3 High, Possible flood on Register ",0.24752475247524752
+19/03/2025 20:05:21,127,"Modbus Code Other High, Possible Modbus Attack",0.42105263157894735
+19/03/2025 20:05:21,127,"Modbus Read Write Ratio Suspiciously High, Possible Modbus Attack",0.7272727272727273
+19/03/2025 20:05:21,127,"Modbus Register 0 High, Possible Modbus Attack",0.5740740740740741
+19/03/2025 20:05:21,127,"Modbus Register 3 High, Possible flood on Register ",0.5925925925925926
+19/03/2025 20:05:23,128,"Modbus Code Other High, Possible Modbus Attack",0.23728813559322035
+19/03/2025 20:05:23,128,"Modbus Read Write Ratio Suspiciously High, Possible Modbus Attack",0.3111111111111111
+19/03/2025 20:05:23,128,"Modbus Register 0 High, Possible Modbus Attack",0.35
+19/03/2025 20:05:23,128,"Modbus Register 3 High, Possible flood on Register ",0.35
+19/03/2025 20:07:42,221,"Modbus Min Response Time Suspiciously Low, Possible DoS",5e-06
+19/03/2025 20:10:11,325,"ARP Spoof Flag Detected, ARP Spoofing",1
+19/03/2025 20:10:12,326,"ARP Spoof Flag Detected, ARP Spoofing",1
+19/03/2025 20:10:15,328,"ARP Spoof Flag Detected, ARP Spoofing",1
+
+19/03/2025 20:37:14,468,"ACK Flag Suspicious, Possible ACK Attack",0.3907074973600845
+19/03/2025 20:37:15,469,"Packet Rate Suspiciously Low, Possible DoS",0.012561377581652697
+19/03/2025 20:37:15,469,"TCP Traffic Suspiciously High, Possible TCP Attack",0.959
+19/03/2025 20:37:15,469,"ACK Flag Suspicious, Possible ACK Attack",0.3983315954118874
+19/03/2025 20:37:17,470,"Packet Rate Suspiciously Low, Possible DoS",0.012657298220767154
+19/03/2025 20:37:17,470,"TCP Traffic Suspiciously High, Possible TCP Attack",0.945
+19/03/2025 20:37:17,470,"ACK Flag Suspicious, Possible ACK Attack",0.4
+19/03/2025 20:37:19,471,"TCP Traffic Suspiciously High, Possible TCP Attack",0.948
+19/03/2025 20:37:19,471,"ACK Flag Suspicious, Possible ACK Attack",0.399789029535865
+19/03/2025 20:37:21,472,"Packet Rate Suspiciously Low, Possible DoS",0.012733444437250361
+19/03/2025 20:37:21,472,"TCP Traffic Suspiciously High, Possible TCP Attack",0.948
+19/03/2025 20:37:21,472,"ACK Flag Suspicious, Possible ACK Attack",0.4008438818565401
+19/03/2025 20:37:23,473,"Packet Rate Suspiciously Low, Possible DoS",0.01268077970625044
+19/03/2025 20:37:23,473,"TCP Traffic Suspiciously High, Possible TCP Attack",0.953
+19/03/2025 20:37:23,473,"ACK Flag Suspicious, Possible ACK Attack",0.38929695697796435
+19/03/2025 20:37:25,474,"Packet Rate Suspiciously Low, Possible DoS",0.02535080516235527
+19/03/2025 20:37:25,474,"TCP Traffic Suspiciously High, Possible TCP Attack",0.944
+19/03/2025 20:37:25,474,"ACK Flag Suspicious, Possible ACK Attack",0.3919491525423729
+19/03/2025 20:37:27,475,"Packet Rate Suspiciously Low, Possible DoS",0.02578508344144338
+19/03/2025 20:37:27,475,"TCP Traffic Suspiciously High, Possible TCP Attack",0.954
+19/03/2025 20:37:27,475,"ACK Flag Suspicious, Possible ACK Attack",0.39622641509433965
+19/03/2025 20:37:29,476,"Packet Rate Suspiciously Low, Possible DoS",0.012234646756131132
+19/03/2025 20:37:29,476,"TCP Traffic Suspiciously High, Possible TCP Attack",0.928
+19/03/2025 20:37:29,476,"ACK Flag Suspicious, Possible ACK Attack",0.3879310344827586
+19/03/2025 20:37:29,476,"ICMP Type 0  High, Possible ICMP Echo Flood",0.39285714285714285
+19/03/2025 20:37:29,476,"ICMP Type 3, Possible ICMP Destination Unreachable Flood",0.03571428571428571
+19/03/2025 20:37:29,476,"ICMP Type 8 High, Possible ICMP Echo Reply Flood",0.5714285714285714
+19/03/2025 20:37:32,477,"TCP Traffic Suspiciously High, Possible TCP Attack",0.926
+19/03/2025 20:37:32,477,"ACK Flag Suspicious, Possible ACK Attack",0.3930885529157667
+19/03/2025 20:37:32,477,"ICMP Type 0  High, Possible ICMP Echo Flood",0.23076923076923078
+19/03/2025 20:37:32,477,"ICMP Type 3, Possible ICMP Destination Unreachable Flood",0.15384615384615385
+19/03/2025 20:37:32,477,"ICMP Type 8 High, Possible ICMP Echo Reply Flood",0.6153846153846154
+19/03/2025 20:37:34,478,"TCP Traffic Suspiciously High, Possible TCP Attack",0.932
+19/03/2025 20:37:34,478,"ACK Flag Suspicious, Possible ACK Attack",0.4002145922746781
+19/03/2025 20:37:34,478,"DNS Query Rate Suspiciously High, Possible DNS Tunneling",1.3678493600140225
+19/03/2025 20:37:34,478,"ICMP Type 3, Possible ICMP Destination Unreachable Flood",0.2
+19/03/2025 20:37:34,478,Unknown ICMP Type Detected,0.6666666666666666
+19/03/2025 20:37:36,479,"Packet Rate Suspiciously Low, Possible DoS",0.025744510068881146
+19/03/2025 20:37:36,479,"TCP Traffic Suspiciously High, Possible TCP Attack",0.951
+19/03/2025 20:37:36,479,"ACK Flag Suspicious, Possible ACK Attack",0.3901156677181914
+19/03/2025 20:37:41,480,"Packet Rate Suspiciously Low, Possible DoS",0.025675595815508222
+19/03/2025 20:37:41,480,"TCP Traffic Suspiciously High, Possible TCP Attack",0.95
+19/03/2025 20:37:41,480,"ACK Flag Suspicious, Possible ACK Attack",0.38842105263157894
+19/03/2025 20:37:45,481,"Packet Rate Suspiciously Low, Possible DoS",0.012832836823181825
+19/03/2025 20:37:45,481,"TCP Traffic Suspiciously High, Possible TCP Attack",0.955
+19/03/2025 20:37:45,481,"ACK Flag Suspicious, Possible ACK Attack",0.393717277486911
+19/03/2025 20:37:45,481,"DNS Query Rate Suspiciously High, Possible DNS Tunneling",1.2480495339178592
+19/03/2025 20:37:48,482,"Packet Rate Suspiciously Low, Possible DoS",0.024308080227388475
+19/03/2025 20:37:48,482,"TCP Traffic Suspiciously High, Possible TCP Attack",0.939
+19/03/2025 20:37:48,482,"ACK Flag Suspicious, Possible ACK Attack",0.4057507987220447
+19/03/2025 20:37:51,483,"Packet Rate Suspiciously Low, Possible DoS",0.024439702890331698
+19/03/2025 20:37:51,483,"TCP Traffic Suspiciously High, Possible TCP Attack",0.938
+19/03/2025 20:37:51,483,"ACK Flag Suspicious, Possible ACK Attack",0.42643923240938164
+19/03/2025 20:37:55,484,"Packet Rate Suspiciously Low, Possible DoS",0.011396668694756768
+19/03/2025 20:37:55,484,"TCP Traffic Suspiciously High, Possible TCP Attack",0.95
+19/03/2025 20:37:55,484,"ACK Flag Suspicious, Possible ACK Attack",0.4421052631578947
+19/03/2025 20:37:59,485,"Packet Rate Suspiciously Low, Possible DoS",0.024017140417363702
+19/03/2025 20:37:59,485,"TCP Traffic Suspiciously High, Possible TCP Attack",0.948
+19/03/2025 20:37:59,485,"ACK Flag Suspicious, Possible ACK Attack",0.43037974683544306
+19/03/2025 20:37:59,485,"Modbus Traffic Suspiciously Low, Possible DoS",2
+19/03/2025 20:37:59,485,"Modbus Code Other High, Possible Modbus Attack",1.0
+19/03/2025 20:38:00,486,"Packet Rate Suspiciously Low, Possible DoS",0.01147646159381122
+19/03/2025 20:38:00,486,"TCP Traffic Suspiciously High, Possible TCP Attack",0.943
+19/03/2025 20:38:00,486,"ACK Flag Suspicious, Possible ACK Attack",0.4252386002120891
+19/03/2025 20:38:00,486,"Modbus Traffic Suspiciously Low, Possible DoS",2
+19/03/2025 20:38:00,486,"Modbus Code Other High, Possible Modbus Attack",1.0
+19/03/2025 20:38:03,487,"TCP Traffic Suspiciously High, Possible TCP Attack",0.946
+19/03/2025 20:38:03,487,"ACK Flag Suspicious, Possible ACK Attack",0.42389006342494717
+19/03/2025 20:38:06,488,"TCP Traffic Suspiciously High, Possible TCP Attack",0.934
+19/03/2025 20:38:06,488,"ACK Flag Suspicious, Possible ACK Attack",0.4346895074946467
+19/03/2025 20:38:06,488,"Modbus Traffic Suspiciously Low, Possible DoS",5
+19/03/2025 20:38:06,488,"Modbus Code Other High, Possible Modbus Attack",1.0
+19/03/2025 20:38:10,489,"Packet Rate Suspiciously Low, Possible DoS",0.011575745629357384
+19/03/2025 20:38:10,489,"TCP Traffic Suspiciously High, Possible TCP Attack",0.937
+19/03/2025 20:38:10,489,"ACK Flag Suspicious, Possible ACK Attack",0.439701173959445
+19/03/2025 20:38:10,489,"Modbus Traffic Suspiciously Low, Possible DoS",3
+19/03/2025 20:38:10,489,"Modbus Code Other High, Possible Modbus Attack",1.0
+19/03/2025 20:38:12,490,"Packet Rate Suspiciously Low, Possible DoS",0.011632441519736289
+19/03/2025 20:38:12,490,"TCP Traffic Suspiciously High, Possible TCP Attack",0.948
+19/03/2025 20:38:12,490,"ACK Flag Suspicious, Possible ACK Attack",0.4240506329113924
+
+19/03/2025 20:54:04,54,"Modbus Code Other High, Possible Modbus Attack",1.0
+19/03/2025 20:54:04,54,"Modbus Register 0 High, Possible Modbus Attack",1.0
+19/03/2025 20:54:04,54,"Modbus Register 3 High, Possible flood on Register ",1.0
+19/03/2025 20:54:05,55,"Modbus Read Write Ratio Suspiciously High, Possible Modbus Attack",0.176056338028169
+19/03/2025 20:55:40,127,"Modbus Code Other High, Possible Modbus Attack",0.42105263157894735
+19/03/2025 20:55:40,127,"Modbus Read Write Ratio Suspiciously High, Possible Modbus Attack",0.7272727272727273
+19/03/2025 20:55:40,127,"Modbus Register 0 High, Possible Modbus Attack",0.5740740740740741
+19/03/2025 20:55:40,127,"Modbus Register 3 High, Possible flood on Register ",0.5925925925925926
+19/03/2025 20:55:41,128,"Modbus Code Other High, Possible Modbus Attack",0.23728813559322035
+19/03/2025 20:55:41,128,"Modbus Read Write Ratio Suspiciously High, Possible Modbus Attack",0.3111111111111111
+19/03/2025 20:55:41,128,"Modbus Register 3 High, Possible flood on Register ",0.35
+19/03/2025 20:57:58,221,"Modbus Min Response Time Suspiciously Low, Possible DoS",5e-06
+19/03/2025 21:00:38,325,"ARP Spoof Flag Detected, ARP Spoofing",1
+19/03/2025 21:00:40,326,"ARP Spoof Flag Detected, ARP Spoofing",1
+19/03/2025 21:00:43,328,"ARP Spoof Flag Detected, ARP Spoofing",1

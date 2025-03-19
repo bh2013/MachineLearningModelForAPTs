@@ -28,14 +28,12 @@ def ReplyRequestDiffernce(window):
                 elif opCode == 2:
                     reply += 1
                     
-    
     if request == 0 or reply == 0:
         return 0
     
     difference = abs(request - reply)
     
-    return difference / max(request, reply, 1)  # Normalized difference
-
+    return difference / max(request, reply, 1) 
 
 
 ARPSpoofTracker = {}

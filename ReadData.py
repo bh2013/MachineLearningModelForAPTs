@@ -20,6 +20,7 @@ import Analysis.Modbus_Analysis as Modbus_Analysis
 import DataVisualisationb.GernalDataVisual as GernalDataVisual
 import FormatData
 import IsolationForrest
+import AnomlyCheck
 # import IsoTest as IsolationForrest
 
 # ---------------------
@@ -112,11 +113,12 @@ def getWindowsData(window):
             if count == 1:
                 # !First Window, can't compare to previous
                 analysis = analyseWindow(window)
+                AnomlyCheck.check(analysis,count)
+
                 formatedData = FormatData.Format(analysis)
                 # GernalDataVisual.SegmentData(formatedData,count)
                 AllWindowsAnalysis.append(formatedData)
-                print("Window " + str(count) + " Done")
-
+                print("\n Window " + str(count) + " Done " )
                 prevWindow = window.copy()
                 window.clear()
                 return
@@ -125,12 +127,14 @@ def getWindowsData(window):
                 # otherwise both windows are wanting to be used for comparisons to be made 
                 analysis = analyseWindow(window)
                 formatedData = FormatData.Format(analysis)
+                AnomlyCheck.check(analysis,count)
 
-                GernalDataVisual.SegmentData(formatedData,count)
+
+                # GernalDataVisual.SegmentData(formatedData,count)
 
                 AllWindowsAnalysis.append(formatedData)
                 
-                print("Window " + str(count) + " Done")
+                print("Window " + str(count) + " Done \n" )
 
                 prevWindow = window.copy()
             window.clear()
@@ -225,8 +229,6 @@ def analyseWindow(window):
     # total = count_items(GeneralStats) + count_items(tcpAnalysis) + count_items(ARPAnalysis) + count_items(DNSAnalysis) + count_items(ICMPAnalysis) + count_items(S7Anlysis) + count_items(ModbusAnalysis)
     # print("Total count:", total)
 
-    
-    
     return GeneralStats,tcpAnalysis,ARPAnalysis,DNSAnalysis,ICMPAnalysis,S7Anlysis,ModbusAnalysis
 
     
@@ -241,36 +243,47 @@ def timeBasedWindowAnalysis(pkt):
 if __name__ == "__main__":
 # ?Can be changed to just capture on an interface, but for now just using a file
     maxWindow = 1000
-
-    #!Clean
     windowDataInfo = collections.deque(maxlen=maxWindow)
     window = getWindowsData(windowDataInfo)
     
     
-    # capture = pyshark.FileCapture("FileData/clean-6h.pcap")
-    # capture.apply_on_packets(window,packet_count=10000)
-    # capture.close()
+    # ?Clean
+    capture = pyshark.FileCapture("FileData/clean-6h.pcap")
+    # capture = pyshark.FileCapture("FileData/4SICS-GeekLounge-151022.pcap")
+
+
     
     
-    capture = pyshark.FileCapture("FileData/4SICS-GeekLounge-151022.pcap")
-    capture.apply_on_packets(window,packet_count=10000)
+    # !Dirty
+    # capture = pyshark.FileCapture("FileData/mitm-change-1m-6h_1.pcap")
+    # capture = pyshark.FileCapture("FileData/modbusFlood5m-30.pcap")
+    # capture = pyshark.FileCapture("FileData/pingFloodDDoS1-1h.pcap")
+    # capture = pyshark.FileCapture("FileData/MITM1m-30.pcap")
+    # capture = pyshark.FileCapture("FileData/tcpSYNFlood-30m.pcap")
+    # capture = pyshark.FileCapture("FileData/Flood1-30.pcap") 
+    
+    capture.apply_on_packets(window,packet_count=0)
     capture.close()
     
     clean = AllWindowsAnalysis
-    AllWindowsAnalysis = []
+    
+    cleanAverage = IsolationForrest.averageOfWindow(clean)
+    
 
-    # # !Dirty
-    capture2 = pyshark.FileCapture("FileData/Flood.pcap")
-    capture2.apply_on_packets(window,packet_count=10000)
-    capture2.close()
     
-    dirty= AllWindowsAnalysis
-    
-    # dirtyData = AllWindowsAnalysis
+    # IsolationForrest.trainModel(clean)
 
-    IsolationForrest.trainModel(clean)
+    # # # !Dirty
+    # capture2 = pyshark.FileCapture("FileData/4SICS-GeekLounge-151021.pcap")
+    # capture2.apply_on_packets(window,packet_count=20000)
+    # capture2.close()
     
-    IsolationForrest.isoFor(dirty)
+    # dirty = AllWindowsAnalysis
+    
+    # # dirtyData = AllWindowsAnalysis
+
+    # IsolationForrest.isoFor(dirty)
+    # print(IsolationForrest.averageOfWindow(dirty))
 
     
     # windowDataInfo = collections.deque()    

@@ -8,23 +8,21 @@ import os
 import pickle
 # get the file 
 
-# def averageOfWindow(analysis):
-#     # !segments data for each protocol 
-#     protocolsCount = len(analysis[0])
-#     totalsFinal = []
-    
-#     for each in range(protocolsCount):
-#         data = [window[each] for window in analysis]
-#         totals = [sum(values) for values in zip(*data)] 
-#         totalsFinal.append(totals)
+def averageOfWindow(analysis):
+    # !segments data for each protocol 
+    protocolsCount = len(analysis[0])
+    totalsFinal = []
+    for each in range(protocolsCount):
+        data = [window[each] for window in analysis]
+        totals = [sum(values) for values in zip(*data)] 
+        totalsFinal.append(totals)
 
-#     averageTotal = []
-#     for each in totalsFinal:
-#         for i in each:
-#             print(len(analysis))
-#             averageTotal.append(i/len(analysis))
+    averageTotal = []
+    for each in totalsFinal:
+        for i in each:
+            averageTotal.append(i/len(analysis))
             
-#     isoFor(averageTotal)
+    return averageTotal
 
 
 # averagepacketlength,deviationOfPacketLength,minPacketLength,MaxPacketLength,outOfOrderPacketRatio,packetPerSecond,windowTiemLength,protocolList(7, each protocol, one being unkown),unkownIpCount
@@ -46,13 +44,12 @@ import pickle
 
 
 features = [
-    
     # general stats
     "averagepacketlength",
     "deviationOfPacketLength",
     "minPacketLength",
     "MaxPacketLength",
-    "outOfOrderPacketRatio",
+    "outOfOrderPacketCount",
     "packetRate",
     "windowTimeLength",
     "meanTimeBetweenPakets"
@@ -138,6 +135,8 @@ features = [
 
 def trainModel(clean,modeFile = "model/IsolationForest.pkl", scalerFile = "model/scaler.pkl"):
     
+    print("Training Isolation Forest model...")
+    
     os.makedirs("model", exist_ok=True) 
     
     cleanFormatted= combineData(clean)
@@ -148,12 +147,24 @@ def trainModel(clean,modeFile = "model/IsolationForest.pkl", scalerFile = "model
     isoForest = IsolationForest(n_estimators=500, contamination=0.1, max_samples="auto", random_state=42, warm_start=True)
     isoForest.fit(trainCleanScaled)
     
+    
+    predictions = isoForest.predict(trainCleanScaled)
+    scores = isoForest.decision_function(trainCleanScaled)
+
+    print("\nIsolationForest Predictions & Scores:\n")
+    for i, score in enumerate(scores):
+        label = "Anomaly" if predictions[i] == -1 else "Normal"
+        print(f"Window {i}: Score = {score:.4f} → {label}")
+        
+    
     with open(modeFile, "wb") as file:
         pickle.dump(isoForest, file)
     
     with open(scalerFile, "wb") as file:
         pickle.dump(scaler, file)
         
+    print("Model trained and saved.")
+    
     return isoForest, scaler
 
 
@@ -172,34 +183,15 @@ def loadModel(modelFile = "model/IsolationForest.pkl", scalerFile = "model/scale
         print("Model not found. Please train the model first.")
         return None, None
 
-
-
-
-def isoFor(clean,dirty):
+def isoFor(dirty):
     
-
     isoForest, scaler = loadModel()
     
-    # !organise Clean Data
-    cleanNew = combineData(clean)
     
     dirtyNew = combineData(dirty)
-    
     dirtyArray = np.array(dirtyNew)
-    trainDirtyScaled = scaler.fit_transform(dirtyArray)
+    trainDirtyScaled = scaler.transform(dirtyArray)
     
-    
-    cleanArray = np.array(cleanNew)
-    trainCleanScaled = scaler.fit_transform(cleanArray)
-    
-
-    
-    # !organise Dirty Data 
-    # dirtyNew = combineData(dirty)
-    # dirtyArray = np.array(dirtyNew)
-    # trainDirtyScaled = scaler.fit_transform(dirtyArray)
-    
-    isoForest.fit_transfrom(trainDirtyScaled)
 
     predictions = isoForest.predict(trainDirtyScaled)
     scores = isoForest.decision_function(trainDirtyScaled)

@@ -49,7 +49,6 @@ def outOfOrderPacketCount(window):
     return total
 
 
-
 def packetRate(window):
     if not window:
         return 0,0,0,0

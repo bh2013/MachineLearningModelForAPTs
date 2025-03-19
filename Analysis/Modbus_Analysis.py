@@ -33,14 +33,24 @@ def codeDistribution(window):
         "3": 0,        
         "Other": 0
     }
+    
+    modbusCounter = 0
     for packet in window:
         if packet["Protocol"] == "MODBUS":
+            modbusCounter += 1
             if packet["Function"] not in functionCodes:
                 functionCodes["Other"] += 1 
             else:
                 functionCodes[str(packet["Function"])] += 1
                 
+    if modbusCounter == 0:
+        return 0,0,0
+    
     sortedCodes = {k: functionCodes[k] for k in sorted(functionCodes)}
+    
+    for each in sortedCodes:
+        sortedCodes[each] = sortedCodes[each]/modbusCounter
+        
     return sortedCodes
 
 
@@ -48,7 +58,6 @@ def codeDistribution(window):
 def readWriteRatio(window):
     readCount = 0
     writeCount = 0
-    
     for packet in window:
         if packet["Protocol"] == "MODBUS":
             if packet["Function"] == "3":
@@ -58,10 +67,10 @@ def readWriteRatio(window):
 
     if readCount == 0 or writeCount == 0:
         return 0
-    else:
-        print(readCount, writeCount)
-        
-        return (writeCount/writeCount )
+    else:        
+        return (writeCount/readCount)
+    
+    
     
 
 def errorCount(window):
@@ -91,9 +100,11 @@ def memoryRegisterChecks(window):
         "10": 0,
         "Other": 0
     }
+    modbusCounter = 0
     for packet in window:
         if packet["Protocol"] == "MODBUS":
             if "Registers" in packet:
+                modbusCounter += 1
                 if len(packet["Registers"]) > 1:
                     for each in packet["Registers"]:
                         if each in register:
@@ -106,8 +117,12 @@ def memoryRegisterChecks(window):
                         else:
                             register["Other"] += 1
 
+    if modbusCounter == 0:
+        return 0,0,0,0,0,0,0,0,0,0,0,0
+    
     sortedReg = {k: register[k] for k in sorted(register)}
-        
+    for each in sortedReg:
+        sortedReg[each] = sortedReg[each]/modbusCounter
     return sortedReg
                 
 def TimeChecks(window):
