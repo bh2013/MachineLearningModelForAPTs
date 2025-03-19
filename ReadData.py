@@ -17,9 +17,10 @@ import Analysis.ARP_Analysis as ARP_Analysis
 import Analysis.DNS_Analysis as DNS_Analysis
 import Analysis.S7_Analysis as S7_Analysis
 import Analysis.Modbus_Analysis as Modbus_Analysis
-import DataVisualisation
+import DataVisualisationb.GernalDataVisual as GernalDataVisual
 import FormatData
 import IsolationForrest
+# import IsoTest as IsolationForrest
 
 # ---------------------
 
@@ -83,10 +84,15 @@ def windowCount():
     count = count + 1
     return count
     
+
+AllWindowsAnalysis = []
+
+
 def getWindowsData(window):
     # sets first window to none
     prevWindow = None 
     def packetGet(pkt , window = window):
+        global AllWindowsAnalysis
         # sets as a non local to allow it to be changed for each windoqw
         # important for processing previous window
         nonlocal prevWindow   
@@ -94,9 +100,6 @@ def getWindowsData(window):
         pkt = getPacketInfo.get(pkt)
         # adds the packet to the current window
         window.append(pkt)
-        
-        
-        
         # !Size based window
         # if window is full then analyse the window
         if len(window) == window.maxlen:
@@ -110,16 +113,24 @@ def getWindowsData(window):
                 # !First Window, can't compare to previous
                 analysis = analyseWindow(window)
                 formatedData = FormatData.Format(analysis)
-                DataVisualisation.displayData(formatedData)
-                
+                # GernalDataVisual.SegmentData(formatedData,count)
+                AllWindowsAnalysis.append(formatedData)
+                print("Window " + str(count) + " Done")
+
                 prevWindow = window.copy()
                 window.clear()
                 return
             else:
+                
                 # otherwise both windows are wanting to be used for comparisons to be made 
                 analysis = analyseWindow(window)
                 formatedData = FormatData.Format(analysis)
-                DataVisualisation.displayData(formatedData)
+
+                GernalDataVisual.SegmentData(formatedData,count)
+
+                AllWindowsAnalysis.append(formatedData)
+                
+                print("Window " + str(count) + " Done")
 
                 prevWindow = window.copy()
             window.clear()
@@ -144,13 +155,12 @@ def analyseWindow(window):
     minMaxPacketLength = General_Analysis.MinMaxLength(window)
     # checks for any unkown src or dst ips in the window
     unkownIps = General_Analysis.knownIpCheck(window)
-    
+
     GeneralStats = averagePacketLength,deviationOfPacketLength,minMaxPacketLength,outOfOrderPacketRatio,flowStats,protocolList,unkownIps
+
     
-    allVars = []
     # !TCP Analysis of window 
-    # if the packet is tcp then check its flags, and replies, if tcpAnalysisSYNAttack is 1 then its a SYN attack
-    
+    # if the packet is tcp then check its flags, and replies, if tcpAnalysisSYNAttack is 1 then its a SYN attack  
     tcpAnalysisSYNAttack,tcpAnalysisFlagDistrabution = TCP_Analysis.ackReplyCheck(window)
     tcpAnalysis =  tcpAnalysisSYNAttack,tcpAnalysisFlagDistrabution 
         
@@ -160,16 +170,14 @@ def analyseWindow(window):
     TTLAvg = ICMP_Analysis.TTLAvg(window)
     FragmentationCheck = ICMP_Analysis.fragmentationCheck(window)
     RedirectRaio,UnreachableRatio = ICMP_Analysis.TypeChecks(window)    
-    # ICMPRoundTripAnalysis = ICMP_Analysis.RoundTrips(window) - no round trips in data set, always 0 
     ICMPAnalysis = ICMPReplyRatio, RedirectRaio, UnreachableRatio, Typeratio, TTLAvg, FragmentationCheck
-    allVars.append(ICMPAnalysis)
-    
+
+
     # !ARP Analysis of window
     arpReplyRequestDiff = ARP_Analysis.ReplyRequestDiffernce(window)
     arpSpoofFlag = ARP_Analysis.DetectARPSpoof(window)
     ARPAnalysis = arpReplyRequestDiff,arpSpoofFlag
 
-    
     
     # !DNS Analysis of window
     dnsQueryRate = DNS_Analysis.DNSQueryRatePerSecond(window)
@@ -181,6 +189,7 @@ def analyseWindow(window):
     plcCommCount = S7_Analysis.plcCommCount(window)
     s7functions = S7_Analysis.S7StartProtocolCount(window) 
     S7Anlysis = plcCommCount,s7functions
+
     
     # !Modbus Analysis of window
     modbusCount = Modbus_Analysis.modbusCounter(window)
@@ -189,31 +198,81 @@ def analyseWindow(window):
     regCheck = Modbus_Analysis.memoryRegisterChecks(window)
     modbusTimeStats = Modbus_Analysis.TimeChecks(window)
     ModbusAnalysis = modbusCount,functionDis,ratio,regCheck,modbusTimeStats
+
     
     # !Return all the variables
     
-    return GeneralStats,tcpAnalysis,ARPAnalysis,DNSAnalysis,ICMPAnalysis,S7Anlysis,ModbusAnalysis
     
+    # printSHape of each variable
+    def count_items(item):
+        if isinstance(item, (int, float)):
+                return 1
+        elif isinstance(item, (list, tuple, set)):
+            return sum(count_items(sub) for sub in item)
+        elif isinstance(item, dict):
+            return sum(count_items(val) for val in item.values())
+        else:
+            return 0
+
+    # print("GeneralStats count:", count_items(GeneralStats))
+    # print("TCPAnalysis count:", count_items(tcpAnalysis))
+    # print("ARPAnalysis count:", count_items(ARPAnalysis))
+    # print("DNSAnalysis count:", count_items(DNSAnalysis))
+    # print("ICMPAnalysis count:", count_items(ICMPAnalysis))
+    # print("S7Analysis count:", count_items(S7Anlysis))
+    # print("ModbusAnalysis count:", count_items(ModbusAnalysis))
+    
+    # total = count_items(GeneralStats) + count_items(tcpAnalysis) + count_items(ARPAnalysis) + count_items(DNSAnalysis) + count_items(ICMPAnalysis) + count_items(S7Anlysis) + count_items(ModbusAnalysis)
+    # print("Total count:", total)
+
+    
+    
+    return GeneralStats,tcpAnalysis,ARPAnalysis,DNSAnalysis,ICMPAnalysis,S7Anlysis,ModbusAnalysis
+
     
     
 def timeBasedWindowAnalysis(pkt):
     window = collections.deque()
     packet = getPacketInfo.get(pkt)
     window.append(packet)    
-        
     
-   
+    
 # main function
 if __name__ == "__main__":
 # ?Can be changed to just capture on an interface, but for now just using a file
-    maxWindow = 5000
+    maxWindow = 1000
+
+    #!Clean
     windowDataInfo = collections.deque(maxlen=maxWindow)
-    capture = pyshark.FileCapture("FileData/clean-6h.pcap")
     window = getWindowsData(windowDataInfo)
-    # !set to 0 to make constant or just choose a big number, less than the size of pcap file 
-    capture.apply_on_packets(window,packet_count=0)
+    
+    
+    # capture = pyshark.FileCapture("FileData/clean-6h.pcap")
+    # capture.apply_on_packets(window,packet_count=10000)
+    # capture.close()
+    
+    
+    capture = pyshark.FileCapture("FileData/4SICS-GeekLounge-151022.pcap")
+    capture.apply_on_packets(window,packet_count=10000)
     capture.close()
- 
+    
+    clean = AllWindowsAnalysis
+    AllWindowsAnalysis = []
+
+    # # !Dirty
+    capture2 = pyshark.FileCapture("FileData/Flood.pcap")
+    capture2.apply_on_packets(window,packet_count=10000)
+    capture2.close()
+    
+    dirty= AllWindowsAnalysis
+    
+    # dirtyData = AllWindowsAnalysis
+
+    IsolationForrest.trainModel(clean)
+    
+    IsolationForrest.isoFor(dirty)
+
+    
     # windowDataInfo = collections.deque()    
     # capture = pyshark.FileCapture("FileData/4SICS-GeekLounge-151020.pcap")
 
@@ -221,5 +280,4 @@ if __name__ == "__main__":
     
     
 
-    
     

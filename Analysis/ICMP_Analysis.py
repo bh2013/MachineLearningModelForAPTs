@@ -7,13 +7,20 @@ def ICMP_Packet(packetInfo, pkt):
 
         packetInfo["Type"] = pkt.icmp.type
         packetInfo["Code"] = pkt.icmp.code
-        packetInfo["TimeToLive"] = pkt.icmp.ip_ttl
-        packetInfo["Id"] = pkt.icmp.ip_id
+        if hasattr(pkt.icmp, "ip_ttl"):
+            packetInfo["TimeToLive"] = pkt.icmp.ip_ttl
+        else:
+            packetInfo["TimeToLive"] = 0
+    
+        if hasattr(pkt.icmp, "ip_id"):
+            packetInfo["Id"] = pkt.icmp.ip_id
+        else:
+            packetInfo["Id"] = 0
         # packetInfo["Payload"] = pkt.icmp.data.data
         
        
     except AttributeError:
-        print("AttributeError")
+        print("AttributeError in ICMP")
         pass
     except Exception as e:
         print("ErrorInICMPPacket: " + str(e))
@@ -28,6 +35,8 @@ def TTLAvg(window):
     
     for packet in window:
         if packet["Protocol"] == "ICMP":
+            if packet["TimeToLive"] == 0:
+                continue
             ICMPCount += 1
             TTLCount += float(packet["TimeToLive"])
             
@@ -35,7 +44,9 @@ def TTLAvg(window):
         return 0
     
     avgTTL = TTLCount / ICMPCount
+    
     return avgTTL
+
 
 # Calculates the response ratio of ICMP packets by collecting requests and replies and calculating the ratio, usally 0 with this data set but could be useful in the future
 # !Done
@@ -64,7 +75,8 @@ def RoundTrips(window):
     allTrips = []
     ICMPCount = 0 
     for packet in window:
-        if packet["Protocol"] == "ICMP":
+        if packet["Protocol"] == "ICMP" and packet["Id"] != 0:
+            
             ICMPCount += 1
             ICMPtype = packet["Type"]
             ICMPid = packet["Id"] 
@@ -86,12 +98,18 @@ def RoundTrips(window):
 
     avgTripStats = mean, largestTime, smallestTime, deviationBetweenTrips
     
-    return ICMPCount,avgTripStats 
+    return avgTripStats 
 
 # Calculates the ratio of ICMP types in the window and returns them in a list with a % 
 # !Done
 def typeRatios(window):
-    types = {}
+    types = {
+        "0":0,
+        "3":0,
+        "5":0,
+        "8":0,
+        "Unknown":0
+    }
     ICMPCount = 0 
     
     for packets in window:
@@ -101,12 +119,23 @@ def typeRatios(window):
             if type in types:
                 types[type] += 1
             else:
-                types[type] = 1
-                
+                types["Unknown"] += 1
+           
+                   
+    if ICMPCount == 0:
+        return 0,0,0,0,0
+     
+    returnTypes = []
     for each in types:
         types[each] = types[each] / ICMPCount
         
-    return types
+
+    for each in types:
+        returnTypes.append(types[each])
+
+    sortedTypes = {k: types[k] for k in sorted(types)}
+
+    return sortedTypes
 
 # Checks for ICMP redirects and unreachable packets w/ counts
 # !Done
@@ -114,6 +143,7 @@ def TypeChecks(window):
     redirect = 0
     unreachable = 0
     ICMPCount = 0
+    
     for packet in window:
         if packet["Protocol"] == "ICMP":
             ICMPCount += 1

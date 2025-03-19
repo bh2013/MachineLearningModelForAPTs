@@ -69,5 +69,9 @@ def S7StartProtocolCount(window):
         returnedList.append(functionList[name])
         del functionList[name]
 
+    sortedList = dict(sorted(functionList.items(), key=lambda item: item[0]))
 
-    return returnedList,readWriteRatio
+    if sortedList == {}:
+        sortedList = 0,0,0,0,0
+        
+    return sortedList,readWriteRatio

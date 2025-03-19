@@ -18,8 +18,6 @@ def Modbus_Packet(packetInfo, pkt):
             else:
                 packetInfo["Registers"] = reg
 
-
-
     except Exception as e:
         print("ErrorInModbusPacket: " + str(e))
     return packetInfo
@@ -30,11 +28,15 @@ def modbusCounter(window):
 
 
 def codeDistribution(window):
-    functionCodes = {}
+    functionCodes = {
+        "1": 0,
+        "3": 0,        
+        "Other": 0
+    }
     for packet in window:
         if packet["Protocol"] == "MODBUS":
             if packet["Function"] not in functionCodes:
-                functionCodes[str(packet["Function"])] = 1
+                functionCodes["Other"] += 1 
             else:
                 functionCodes[str(packet["Function"])] += 1
                 
@@ -57,7 +59,9 @@ def readWriteRatio(window):
     if readCount == 0 or writeCount == 0:
         return 0
     else:
-        return (readCount / writeCount)
+        print(readCount, writeCount)
+        
+        return (writeCount/writeCount )
     
 
 def errorCount(window):
@@ -73,7 +77,20 @@ def errorCount(window):
 
 
 def memoryRegisterChecks(window):
-    register = {}
+    register = {
+        "0": 0,
+        "1": 0, 
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "Other": 0
+    }
     for packet in window:
         if packet["Protocol"] == "MODBUS":
             if "Registers" in packet:
@@ -87,19 +104,21 @@ def memoryRegisterChecks(window):
                         if packet["Registers"] in register:
                             register[packet["Registers"]] += 1 
                         else:
-                            register[packet["Registers"]] = 0 
+                            register["Other"] += 1
 
     sortedReg = {k: register[k] for k in sorted(register)}
         
     return sortedReg
                 
-
 def TimeChecks(window):
     modbusTimes = []
     for packet in window:
         if packet["Protocol"] == "MODBUS" and "ModbusTime" in packet:
             modbusTimes.append(packet["ModbusTime"])
             
+    if len(modbusTimes) == 0:
+        return 0,0,0,0
+    
     averageresponseTime = np.mean(modbusTimes)
     maxTime = np.max(modbusTimes)
     minTime = np.min(modbusTimes)

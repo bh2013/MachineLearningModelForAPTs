@@ -95,11 +95,13 @@ def ackReplyCheck(window, MaxSynCount = 600, ratioThreshold = 0.8):
     
     synAckRatio = synAckCount/synCount
     
+    sortedFlagCounts = {k: flagCounts[k] for k in sorted(flagCounts)}
+    
     if synCount > MaxSynCount and synAckRatio < ratioThreshold:
         print("SYN Attack possible")
-        return 1,normalisedFlagCounts
+        return 1,sortedFlagCounts
     else:
-        return 0,normalisedFlagCounts
+        return 0,sortedFlagCounts
     
     
     

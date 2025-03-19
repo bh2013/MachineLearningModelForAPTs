@@ -1,6 +1,8 @@
 import Analysis.ipList as ipList
 import numpy as np
 
+
+
 def knownIpCheck(window):
 
     knownIps = set(ipList.IpsPorts())
@@ -74,7 +76,7 @@ def packetRate(window):
     historgram, bin_edge = np.histogram(diffInTimeBetweenPackets, bins = 10, density=True)
     historgram = historgram/np.sum(historgram)
     historgram = historgram[historgram >0]
-    entropy = -np.sum(historgram * np.log2(historgram))
+
     
   
 
@@ -89,6 +91,7 @@ def packetRate(window):
         float(meanTimeDifferencePerPacket),
         float(standardDeviationBetweenPackets),
         }
+
     
 def windowAveragePacketLength(window):  
     average = sum(int(packet["Length"]) for packet in window)/len(window)
