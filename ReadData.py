@@ -21,7 +21,7 @@ import DataVisualisationb.GernalDataVisual as GernalDataVisual
 import FormatData
 import IsolationForrest
 import AnomlyCheck
-# import IsoTest as IsolationForrest
+
 
 # ---------------------
 
@@ -106,31 +106,28 @@ def getWindowsData(window):
         if len(window) == window.maxlen:
             # gets the number of windows
             count = int(windowCount())
-            # if its 1 its the first widnow so no previous, only analyse the current window
-            # !important as can catch problems on start, eg first packet doing something malicious
-            # ?mayne this isnt needed tho, should be able to catch soemthing suspicious in the first window when sent to ML model
             # Take note of this 
             if count == 1:
                 # !First Window, can't compare to previous
                 analysis = analyseWindow(window)
-                AnomlyCheck.check(analysis,count)
 
                 formatedData = FormatData.Format(analysis)
-                # GernalDataVisual.SegmentData(formatedData,count)
+                AnomlyCheck.check(analysis,count)
+
+                GernalDataVisual.SegmentData(formatedData,count)
                 AllWindowsAnalysis.append(formatedData)
                 print("\n Window " + str(count) + " Done " )
                 prevWindow = window.copy()
                 window.clear()
                 return
             else:
+                # otherwise both windows are wanting to be used for comparisons to be made
                 
-                # otherwise both windows are wanting to be used for comparisons to be made 
                 analysis = analyseWindow(window)
                 formatedData = FormatData.Format(analysis)
                 AnomlyCheck.check(analysis,count)
 
-
-                # GernalDataVisual.SegmentData(formatedData,count)
+                GernalDataVisual.SegmentData(formatedData,count)
 
                 AllWindowsAnalysis.append(formatedData)
                 
@@ -159,9 +156,7 @@ def analyseWindow(window):
     minMaxPacketLength = General_Analysis.MinMaxLength(window)
     # checks for any unkown src or dst ips in the window
     unkownIps = General_Analysis.knownIpCheck(window)
-
     GeneralStats = averagePacketLength,deviationOfPacketLength,minMaxPacketLength,outOfOrderPacketRatio,flowStats,protocolList,unkownIps
-
     
     # !TCP Analysis of window 
     # if the packet is tcp then check its flags, and replies, if tcpAnalysisSYNAttack is 1 then its a SYN attack  
@@ -206,7 +201,6 @@ def analyseWindow(window):
     
     # !Return all the variables
     
-    
     # printSHape of each variable
     def count_items(item):
         if isinstance(item, (int, float)):
@@ -231,30 +225,19 @@ def analyseWindow(window):
 
     return GeneralStats,tcpAnalysis,ARPAnalysis,DNSAnalysis,ICMPAnalysis,S7Anlysis,ModbusAnalysis
 
-    
-    
-def timeBasedWindowAnalysis(pkt):
-    window = collections.deque()
-    packet = getPacketInfo.get(pkt)
-    window.append(packet)    
-    
-    
+
 # main function
 if __name__ == "__main__":
 # ?Can be changed to just capture on an interface, but for now just using a file
     maxWindow = 1000
     windowDataInfo = collections.deque(maxlen=maxWindow)
     window = getWindowsData(windowDataInfo)
-    
-    
-    # ?Clean
+    # ?Clean Data
     capture = pyshark.FileCapture("FileData/clean-6h.pcap")
-    # capture = pyshark.FileCapture("FileData/4SICS-GeekLounge-151022.pcap")
-
-
+    # capture = pyshark.FileCapture("FileData/4SICS-G
+    # eekLounge-151022.pcap")
     
-    
-    # !Dirty
+    # !Dirty Data 
     # capture = pyshark.FileCapture("FileData/mitm-change-1m-6h_1.pcap")
     # capture = pyshark.FileCapture("FileData/modbusFlood5m-30.pcap")
     # capture = pyshark.FileCapture("FileData/pingFloodDDoS1-1h.pcap")
@@ -262,34 +245,32 @@ if __name__ == "__main__":
     # capture = pyshark.FileCapture("FileData/tcpSYNFlood-30m.pcap")
     # capture = pyshark.FileCapture("FileData/Flood1-30.pcap") 
     
-    capture.apply_on_packets(window,packet_count=0)
+    capture.apply_on_packets(window,packet_count=100000)
     capture.close()
+        
     
+    # !Training Model on clean data
     clean = AllWindowsAnalysis
     
     cleanAverage = IsolationForrest.averageOfWindow(clean)
     
-
     
-    # IsolationForrest.trainModel(clean)
+    IsolationForrest.trainModel(clean)
 
-    # # # !Dirty
-    # capture2 = pyshark.FileCapture("FileData/4SICS-GeekLounge-151021.pcap")
+    AllWindowsAnalysis = []
+    # # !Dirty
+    # capture2 = pyshark.FileCapture("FileData/mitm-change-1m-6h_1.pcap")
+    # capture2 = pyshark.FileCapture("FileData/modbusFlood5m-30.pcap")
+
     # capture2.apply_on_packets(window,packet_count=20000)
     # capture2.close()
     
-    # dirty = AllWindowsAnalysis
-    
-    # # dirtyData = AllWindowsAnalysis
+    dirty = AllWindowsAnalysis
+    IsolationForrest.isoFor(dirty)
 
-    # IsolationForrest.isoFor(dirty)
-    # print(IsolationForrest.averageOfWindow(dirty))
 
     
-    # windowDataInfo = collections.deque()    
-    # capture = pyshark.FileCapture("FileData/4SICS-GeekLounge-151020.pcap")
 
-    # capture.apply_on_packets(timeBasedWindowAnalysis)
     
     
 

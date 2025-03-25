@@ -25,24 +25,6 @@ def averageOfWindow(analysis):
     return averageTotal
 
 
-# averagepacketlength,deviationOfPacketLength,minPacketLength,MaxPacketLength,outOfOrderPacketRatio,packetPerSecond,windowTiemLength,protocolList(7, each protocol, one being unkown),unkownIpCount
-# synAckattackFlag, 
-# icmpReplyRateRatio, icmpRedirectRatio, icmpUnreachableRatio, icmpTypeRatio, icmpTTLAvg, icmpFragmentationCheck
-# arpReplyRequestDiff, arpSpoofFlag,
-# dnsQueryRate, DNSQueryRatePerSecond
-# plcCommCount, s7functions("ReadCount": 0, "writeCount": 0,"startCount": 0, "stopCount": 0, "PLcount": 0)
-
-# modbusCount, functionDis(3 outputs counts of functions 0,1,3), ratio, regCheck(11 outputs, counts of each regiser), modbusTimeStats(4 outputs,response time,max time, min time, devation of time)
- 
-# General Stats (7 features)
-# TCP Flags (9 features)
-# ICMP Stats (2 features)
-# ARP Anomalies (2 features)
-# DNS Query Rate (5 features)
-# S7comm Industrial (7 features)
-# Modbus Industrial (7 features)
-
-
 features = [
     # general stats
     "averagepacketlength",
@@ -134,11 +116,9 @@ features = [
 
 
 def trainModel(clean,modeFile = "model/IsolationForest.pkl", scalerFile = "model/scaler.pkl"):
-    
     print("Training Isolation Forest model...")
-    
     os.makedirs("model", exist_ok=True) 
-    
+
     cleanFormatted= combineData(clean)
     cleanArr = np.array(cleanFormatted)
 
@@ -147,16 +127,7 @@ def trainModel(clean,modeFile = "model/IsolationForest.pkl", scalerFile = "model
     isoForest = IsolationForest(n_estimators=500, contamination=0.1, max_samples="auto", random_state=42, warm_start=True)
     isoForest.fit(trainCleanScaled)
     
-    
-    predictions = isoForest.predict(trainCleanScaled)
-    scores = isoForest.decision_function(trainCleanScaled)
 
-    print("\nIsolationForest Predictions & Scores:\n")
-    for i, score in enumerate(scores):
-        label = "Anomaly" if predictions[i] == -1 else "Normal"
-        print(f"Window {i}: Score = {score:.4f} → {label}")
-        
-    
     with open(modeFile, "wb") as file:
         pickle.dump(isoForest, file)
     
@@ -169,7 +140,6 @@ def trainModel(clean,modeFile = "model/IsolationForest.pkl", scalerFile = "model
 
 
 def loadModel(modelFile = "model/IsolationForest.pkl", scalerFile = "model/scaler.pkl"):
-    
     try:
         with open(modelFile, "rb") as file:
             isoForest = pickle.load(file)
@@ -186,69 +156,19 @@ def loadModel(modelFile = "model/IsolationForest.pkl", scalerFile = "model/scale
 def isoFor(dirty):
     
     isoForest, scaler = loadModel()
-    
-    
     dirtyNew = combineData(dirty)
     dirtyArray = np.array(dirtyNew)
     trainDirtyScaled = scaler.transform(dirtyArray)
-    
-
     predictions = isoForest.predict(trainDirtyScaled)
     scores = isoForest.decision_function(trainDirtyScaled)
 
     # predictions = isoForest.predict(trainCleanScaled)
     # scores = isoForest.decision_function(trainCleanScaled)
-    
-
     print(predictions)
-    
     print("\nIsolationForest Predictions & Scores:\n")
     for i, score in enumerate(scores):
         label = "Anomaly" if predictions[i] == -1 else "Normal"
         print(f"Window {i}: Score = {score:.4f} → {label}")
-        
-        
-    # !explain clean data
-    # explainer = shap.Explainer(isoForest,trainCleanScaled)
-    # shapVals = explainer(trainCleanScaled)
-    
-    
-    
-    # shap.summary_plot(shapVals, pd.DataFrame(trainCleanScaled, columns= features))
-    
-
-    
-    # anomalyIndices = np.where(predictions == -1)[0]
-    
-    # if len(anomalyIndices) > 0:
-    #     idx = anomalyIndices[0]
-    #     print(f"\nSHAP explanation for the first anomaly (Window {idx}):\n")
-    #     displayShap(shapVals[idx], cleanArray[idx])
-    # else:
-    #     print("\nNo anomalies detected.")
-        
-        
-        
-        
-    # # !explain dirty data
-    # explainer = shap.Explainer(isoForest,trainDirtyScaled)
-    # shapVals = explainer(trainDirtyScaled)
-    
-    
-    
-    # shap.summary_plot(shapVals, pd.DataFrame(trainDirtyScaled, columns= features))
-    
-
-    
-    # anomalyIndices = np.where(predictions == -1)[0]
-    
-    # if len(anomalyIndices) > 0:
-    #     idx = anomalyIndices[0]
-    #     print(f"\nSHAP explanation for the first anomaly (Window {idx}):\n")
-    #     displayShap(shapVals[idx], trainDirtyScaled[idx])
-    # else:
-    #     print("\nNo anomalies detected.")
-
 
 
 def displayShap(shapVals, data):
@@ -269,18 +189,6 @@ def displayShap(shapVals, data):
         if impact == "↑ Anomaly":
             print(f"{idx:<12} {data[idx]:<15.4f} {val:<12.4f} {impact}")
         
-        
-    # Simple terminal SHAP display:
-
-    # anomaly_scores = iso_forest.decision_function(trainScaled)
-
-    # predictions = iso_forest.predict(trainScaled)
-    # print(predictions)
-    
-    
-    # # Print the scores
-    # for i, score in enumerate(anomaly_scores):
-    #     print(f"Window {i}: Anomaly Score = {score}")
 
 
 def combineData(allWindows):
@@ -293,16 +201,4 @@ def combineData(allWindows):
         oneList.append(returnList)
     return oneList
 
-
-
-
-# labels = isoForrest.predict(data)
-# scores = isoForrest.score_samples(data)
-
-# data['IF_Label'] = labels
-# data['IF_Score'] = scores
-
-# anomalies = data[data['IF_Label'] == -1]
-# print("Number of anomalies detected:", len(anomalies))
-# print(anomalies.head())
 

@@ -1,0 +1,443 @@
+Timestamp,Window,Anomaly Description,Value
+21/03/2025 13:10:41,1,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:10:41,1,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:10:41,1,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:10:42,2,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:10:42,2,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:10:42,2,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:10:44,3,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:10:44,3,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:10:44,3,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:10:45,4,"Packet Rate Suspiciously Low, Possible DoS",0.016404021485321333
+21/03/2025 13:10:45,4,"Mean Time Between Packets Suspiciously Low, Possible DoS",0.001305769871663045
+21/03/2025 13:10:45,4,"TCP Traffic Suspiciously High, Possible TCP Attack",0.832
+21/03/2025 13:10:45,4,"FIN Flag Suspiciously High, FIN Scans",0.21754807692307693
+21/03/2025 13:10:45,4,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:10:45,4,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:10:45,4,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.318018
+21/03/2025 13:10:45,4,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.04378812616081757
+21/03/2025 13:10:47,5,"Window Time Length Suspiciously High, Possible Slow Drip",874.9648234979243
+21/03/2025 13:10:47,5,"Mean Time Between Packets Suspiciously Low, Possible DoS",0.009650576469836991
+21/03/2025 13:10:47,5,"Standard Deviation Time Between Packets Suspiciously Low, Possible DoS",0.0011440471366599755
+21/03/2025 13:10:47,5,"TCP Traffic Suspiciously High, Possible TCP Attack",0.845
+21/03/2025 13:10:47,5,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:10:47,5,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:10:47,5,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.113331
+21/03/2025 13:10:47,5,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.026103888113340145
+21/03/2025 13:10:48,6,"Packet Rate Suspiciously Low, Possible DoS",0.012137676708387692
+21/03/2025 13:10:48,6,"Standard Deviation Time Between Packets Suspiciously Low, Possible DoS",0.001285265396545838
+21/03/2025 13:10:48,6,"TCP Traffic Suspiciously High, Possible TCP Attack",0.854
+21/03/2025 13:10:48,6,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:10:48,6,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:10:48,6,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.121575
+21/03/2025 13:10:48,6,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.03395648529477204
+21/03/2025 13:10:50,7,"Window Time Length Suspiciously Low, Possible DoS",0.0011947508211489076
+21/03/2025 13:10:50,7,"TCP Traffic Suspiciously High, Possible TCP Attack",0.879
+21/03/2025 13:10:50,7,"FIN Flag Suspiciously High, FIN Scans",0.23321956769055746
+21/03/2025 13:10:50,7,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:10:50,7,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:10:50,7,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.135115
+21/03/2025 13:10:50,7,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.037114470644782724
+
+21/03/2025 13:25:01,1,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:01,1,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:01,1,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:02,2,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:02,2,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:02,2,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:03,3,"Unknown IP Count Suspiciously High, Possible MITM",48
+21/03/2025 13:25:03,3,"ICMP Type 8 High, Possible ICMP Echo Reply Flood",1.0
+21/03/2025 13:25:03,3,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:03,3,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:03,3,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:04,4,"Packet Rate Suspiciously Low, Possible DoS",0.007703995919442392
+21/03/2025 13:25:04,4,"ICMP Traffic Suspiciously High, Possible DoS",0.923
+21/03/2025 13:25:04,4,"Unknown IP Count Suspiciously High, Possible MITM",925
+21/03/2025 13:25:04,4,"ICMP Type 8 High, Possible ICMP Echo Reply Flood",1.0
+21/03/2025 13:25:04,4,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:04,4,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:04,4,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:05,5,"Packet Rate Suspiciously Low, Possible DoS",0.009963629694800524
+21/03/2025 13:25:05,5,"Standard Deviation Time Between Packets Suspiciously Low, Possible DoS",0.004746634442288357
+21/03/2025 13:25:05,5,"ICMP Traffic Suspiciously High, Possible DoS",0.947
+21/03/2025 13:25:05,5,"Unknown IP Count Suspiciously High, Possible MITM",949
+21/03/2025 13:25:05,5,"ICMP Type 8 High, Possible ICMP Echo Reply Flood",1.0
+21/03/2025 13:25:05,5,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:05,5,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:05,5,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:05,6,"Packet Rate Suspiciously Low, Possible DoS",0.010088170786718248
+21/03/2025 13:25:05,6,"Mean Time Between Packets Suspiciously Low, Possible DoS",0.004854775763846733
+21/03/2025 13:25:05,6,"ICMP Traffic Suspiciously High, Possible DoS",0.965
+21/03/2025 13:25:05,6,"Unknown IP Count Suspiciously High, Possible MITM",967
+21/03/2025 13:25:05,6,"FIN Flag Suspiciously High, FIN Scans",0.2222222222222222
+21/03/2025 13:25:05,6,"ICMP Type 8 High, Possible ICMP Echo Reply Flood",1.0
+21/03/2025 13:25:05,6,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:05,6,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:05,6,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:06,7,"Packet Rate Suspiciously Low, Possible DoS",0.010043013247756603
+21/03/2025 13:25:06,7,"Window Time Length Suspiciously Low, Possible DoS",0.004710033252551868
+21/03/2025 13:25:06,7,"ICMP Traffic Suspiciously High, Possible DoS",0.944
+21/03/2025 13:25:06,7,"Unknown IP Count Suspiciously High, Possible MITM",946
+21/03/2025 13:25:06,7,"ICMP Type 8 High, Possible ICMP Echo Reply Flood",1.0
+21/03/2025 13:25:06,7,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:06,7,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:06,7,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:06,8,"Packet Rate Suspiciously Low, Possible DoS",0.010114765933979307
+21/03/2025 13:25:06,8,"Window Time Length Suspiciously Low, Possible DoS",0.0047136174069271905
+21/03/2025 13:25:06,8,"ICMP Traffic Suspiciously High, Possible DoS",0.944
+21/03/2025 13:25:06,8,"Unknown IP Count Suspiciously High, Possible MITM",946
+21/03/2025 13:25:06,8,"ARP Reply Request Diff Suspiciously High, Possible ARP Spoofing",0.7142857142857143
+21/03/2025 13:25:06,8,"ICMP Type 8 High, Possible ICMP Echo Reply Flood",1.0
+21/03/2025 13:25:06,8,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:06,8,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:06,8,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:07,9,"Packet Rate Suspiciously Low, Possible DoS",0.00484349443628504
+21/03/2025 13:25:07,9,"Window Time Length Suspiciously Low, Possible DoS",0.009951574590693669
+21/03/2025 13:25:07,9,"ICMP Traffic Suspiciously High, Possible DoS",0.965
+21/03/2025 13:25:07,9,"Unknown IP Count Suspiciously High, Possible MITM",967
+21/03/2025 13:25:07,9,"FIN Flag Suspiciously High, FIN Scans",0.2222222222222222
+21/03/2025 13:25:07,9,"ICMP Type 8 High, Possible ICMP Echo Reply Flood",1.0
+21/03/2025 13:25:07,9,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:07,9,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:07,9,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:07,10,"Packet Rate Suspiciously Low, Possible DoS",0.00470926024176337
+21/03/2025 13:25:07,10,"Standard Deviation Time Between Packets Suspiciously Low, Possible DoS",0.009836998367264219
+21/03/2025 13:25:07,10,"ICMP Traffic Suspiciously High, Possible DoS",0.944
+21/03/2025 13:25:07,10,"Unknown IP Count Suspiciously High, Possible MITM",946
+21/03/2025 13:25:07,10,"ICMP Type 8 High, Possible ICMP Echo Reply Flood",1.0
+21/03/2025 13:25:07,10,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:07,10,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:07,10,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:08,11,"Packet Rate Suspiciously Low, Possible DoS",0.004753570537548046
+21/03/2025 13:25:08,11,"ICMP Traffic Suspiciously High, Possible DoS",0.947
+21/03/2025 13:25:08,11,"Unknown IP Count Suspiciously High, Possible MITM",949
+21/03/2025 13:25:08,11,"ICMP Type 8 High, Possible ICMP Echo Reply Flood",1.0
+21/03/2025 13:25:08,11,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:08,11,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:08,11,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:08,12,"Packet Rate Suspiciously Low, Possible DoS",0.010922523393224337
+21/03/2025 13:25:08,12,"Window Time Length Suspiciously Low, Possible DoS",0.004819711765369495
+21/03/2025 13:25:08,12,"ICMP Traffic Suspiciously High, Possible DoS",0.965
+21/03/2025 13:25:08,12,"Unknown IP Count Suspiciously High, Possible MITM",967
+21/03/2025 13:25:08,12,"FIN Flag Suspiciously High, FIN Scans",0.2222222222222222
+21/03/2025 13:25:08,12,"ICMP Type 8 High, Possible ICMP Echo Reply Flood",1.0
+21/03/2025 13:25:08,12,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:08,12,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:08,12,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:09,13,"Packet Rate Suspiciously Low, Possible DoS",0.004708581500583225
+21/03/2025 13:25:09,13,"ICMP Traffic Suspiciously High, Possible DoS",0.946
+21/03/2025 13:25:09,13,"Unknown IP Count Suspiciously High, Possible MITM",948
+21/03/2025 13:25:09,13,"ICMP Type 8 High, Possible ICMP Echo Reply Flood",1.0
+21/03/2025 13:25:09,13,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:09,13,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:09,13,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:10,14,"Packet Rate Suspiciously Low, Possible DoS",0.0047102222690830475
+21/03/2025 13:25:10,14,"ICMP Traffic Suspiciously High, Possible DoS",0.943
+21/03/2025 13:25:10,14,"Unknown IP Count Suspiciously High, Possible MITM",945
+21/03/2025 13:25:10,14,"ICMP Type 8 High, Possible ICMP Echo Reply Flood",1.0
+21/03/2025 13:25:10,14,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:10,14,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:10,14,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:10,15,"Packet Rate Suspiciously Low, Possible DoS",0.011363958248400488
+21/03/2025 13:25:10,15,"Mean Time Between Packets Suspiciously Low, Possible DoS",0.005148052095292925
+21/03/2025 13:25:10,15,"ICMP Traffic Suspiciously High, Possible DoS",0.963
+21/03/2025 13:25:10,15,"Unknown IP Count Suspiciously High, Possible MITM",965
+21/03/2025 13:25:10,15,"FIN Flag Suspiciously High, FIN Scans",0.21052631578947367
+21/03/2025 13:25:10,15,"ICMP Type 8 High, Possible ICMP Echo Reply Flood",1.0
+21/03/2025 13:25:10,15,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:10,15,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:10,15,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:11,16,"Packet Rate Suspiciously Low, Possible DoS",0.043977847686401
+21/03/2025 13:25:11,16,"ICMP Traffic Suspiciously High, Possible DoS",0.558
+21/03/2025 13:25:11,16,"Unknown IP Count Suspiciously High, Possible MITM",560
+21/03/2025 13:25:11,16,"ICMP Type 8 High, Possible ICMP Echo Reply Flood",1.0
+21/03/2025 13:25:11,16,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:11,16,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:11,16,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:12,17,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:12,17,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:12,17,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:14,18,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:14,18,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:14,18,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:15,19,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:15,19,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:15,19,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:16,20,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:16,20,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:16,20,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:18,21,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:18,21,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:18,21,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:19,22,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:19,22,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:19,22,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:20,23,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:20,23,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:20,23,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:25:21,24,"Packet Rate Suspiciously Low, Possible DoS",0.016404021485321333
+21/03/2025 13:25:21,24,"Mean Time Between Packets Suspiciously Low, Possible DoS",0.001305769871663045
+21/03/2025 13:25:21,24,"TCP Traffic Suspiciously High, Possible TCP Attack",0.832
+21/03/2025 13:25:21,24,"FIN Flag Suspiciously High, FIN Scans",0.21754807692307693
+21/03/2025 13:25:21,24,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:25:21,24,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:25:21,24,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.318018
+21/03/2025 13:25:21,24,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.04378812616081757
+21/03/2025 13:26:02,18,"Unknown IP Count Suspiciously High, Possible MITM",9
+21/03/2025 13:26:13,26,"ICMP Type 0  High, Possible ICMP Echo Flood",0.5
+21/03/2025 13:26:13,26,"ICMP Type 3, Possible ICMP Destination Unreachable Flood",0.25
+21/03/2025 13:26:13,26,"ICMP Type 8 High, Possible ICMP Echo Reply Flood",0.25
+21/03/2025 13:27:24,18,"Unknown IP Count Suspiciously High, Possible MITM",9
+21/03/2025 13:27:28,21,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:27:28,21,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:27:28,21,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:27:29,22,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:27:29,22,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:27:29,22,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:27:31,23,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:27:31,23,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:27:31,23,"Modbus Register 3 High, Possible flood on Register ",1.0
+21/03/2025 13:27:32,24,"Packet Rate Suspiciously Low, Possible DoS",0.016404021485321333
+21/03/2025 13:27:32,24,"Mean Time Between Packets Suspiciously Low, Possible DoS",0.001305769871663045
+21/03/2025 13:27:32,24,"TCP Traffic Suspiciously High, Possible TCP Attack",0.832
+21/03/2025 13:27:32,24,"FIN Flag Suspiciously High, FIN Scans",0.21754807692307693
+21/03/2025 13:27:32,24,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:27:32,24,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:27:32,24,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.318018
+21/03/2025 13:27:32,24,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.04378812616081757
+21/03/2025 13:27:34,25,"Window Time Length Suspiciously High, Possible Slow Drip",874.9648234979243
+21/03/2025 13:27:34,25,"Mean Time Between Packets Suspiciously Low, Possible DoS",0.009650576469836991
+21/03/2025 13:27:34,25,"Standard Deviation Time Between Packets Suspiciously Low, Possible DoS",0.0011440471366599755
+21/03/2025 13:27:34,25,"TCP Traffic Suspiciously High, Possible TCP Attack",0.845
+21/03/2025 13:27:34,25,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:27:34,25,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:27:34,25,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.113331
+21/03/2025 13:27:34,25,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.026103888113340145
+21/03/2025 13:27:35,26,"Packet Rate Suspiciously Low, Possible DoS",0.012137676708387692
+21/03/2025 13:27:35,26,"Standard Deviation Time Between Packets Suspiciously Low, Possible DoS",0.001285265396545838
+21/03/2025 13:27:35,26,"TCP Traffic Suspiciously High, Possible TCP Attack",0.854
+21/03/2025 13:27:35,26,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:27:35,26,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:27:35,26,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.121575
+21/03/2025 13:27:35,26,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.03395648529477204
+21/03/2025 13:27:37,27,"Window Time Length Suspiciously Low, Possible DoS",0.0011947508211489076
+21/03/2025 13:27:37,27,"TCP Traffic Suspiciously High, Possible TCP Attack",0.879
+21/03/2025 13:27:37,27,"FIN Flag Suspiciously High, FIN Scans",0.23321956769055746
+21/03/2025 13:27:37,27,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:27:37,27,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:27:37,27,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.135115
+21/03/2025 13:27:37,27,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.037114470644782724
+21/03/2025 13:27:38,28,"Packet Rate Suspiciously Low, Possible DoS",0.0013320388736667577
+21/03/2025 13:27:38,28,"TCP Traffic Suspiciously High, Possible TCP Attack",0.864
+21/03/2025 13:27:38,28,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:27:38,28,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:27:38,28,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.109373
+21/03/2025 13:27:38,28,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.03103597533907224
+21/03/2025 13:27:40,29,"Packet Rate Suspiciously Low, Possible DoS",0.01614928587399649
+21/03/2025 13:27:40,29,"Standard Deviation Time Between Packets Suspiciously Low, Possible DoS",0.0014009349219672553
+21/03/2025 13:27:40,29,"TCP Traffic Suspiciously High, Possible TCP Attack",0.871
+21/03/2025 13:27:40,29,"FIN Flag Suspiciously High, FIN Scans",0.21699196326061998
+21/03/2025 13:27:40,29,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:27:40,29,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:27:40,29,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.134421
+21/03/2025 13:27:40,29,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.030419718659891296
+21/03/2025 13:27:41,30,"Packet Rate Suspiciously Low, Possible DoS",0.002102389349951758
+21/03/2025 13:27:41,30,"TCP Traffic Suspiciously High, Possible TCP Attack",0.856
+21/03/2025 13:27:41,30,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:27:41,30,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:27:41,30,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.168599
+21/03/2025 13:27:41,30,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.04733643681328135
+21/03/2025 13:27:43,31,"Standard Deviation Time Between Packets Suspiciously Low, Possible DoS",0.001168048894918478
+21/03/2025 13:27:43,31,"TCP Traffic Suspiciously High, Possible TCP Attack",0.836
+21/03/2025 13:27:43,31,"FIN Flag Suspiciously High, FIN Scans",0.22248803827751196
+21/03/2025 13:27:43,31,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:27:43,31,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:27:43,31,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.025236209586944964
+21/03/2025 13:27:44,32,"Packet Rate Suspiciously Low, Possible DoS",0.0013873531773045018
+21/03/2025 13:27:44,32,"Window Time Length Suspiciously High, Possible Slow Drip",721.5185126442374
+21/03/2025 13:27:44,32,"TCP Traffic Suspiciously High, Possible TCP Attack",0.821
+21/03/2025 13:27:44,32,"FIN Flag Suspiciously High, FIN Scans",0.22168087697929353
+21/03/2025 13:27:44,32,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:27:44,32,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:27:44,32,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.124071
+21/03/2025 13:27:44,32,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.03434832473291346
+21/03/2025 13:27:46,33,"Window Time Length Suspiciously Low, Possible DoS",0.0013791720072428386
+21/03/2025 13:27:46,33,"TCP Traffic Suspiciously High, Possible TCP Attack",0.91
+21/03/2025 13:27:46,33,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:27:46,33,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:27:46,33,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.133708
+21/03/2025 13:27:46,33,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.03735132098052223
+21/03/2025 13:27:47,34,"Packet Rate Suspiciously Low, Possible DoS",0.031947408832568594
+21/03/2025 13:27:47,34,"Mean Time Between Packets Suspiciously Low, Possible DoS",0.0020533903941019876
+21/03/2025 13:27:47,34,"TCP Traffic Suspiciously High, Possible TCP Attack",0.817
+21/03/2025 13:27:47,34,"FIN Flag Suspiciously High, FIN Scans",0.23133414932680538
+21/03/2025 13:27:47,34,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:27:47,34,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:27:47,34,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.023558777450639286
+21/03/2025 13:27:49,35,"Packet Rate Suspiciously Low, Possible DoS",0.001385225309385313
+21/03/2025 13:27:49,35,"TCP Traffic Suspiciously High, Possible TCP Attack",0.862
+21/03/2025 13:27:49,35,"FIN Flag Suspiciously High, FIN Scans",0.2088167053364269
+21/03/2025 13:27:49,35,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:27:49,35,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:27:49,35,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.120926
+21/03/2025 13:27:49,35,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.026520438845619734
+21/03/2025 13:27:50,36,"Packet Rate Suspiciously Low, Possible DoS",0.0011274573561904189
+21/03/2025 13:27:50,36,"TCP Traffic Suspiciously High, Possible TCP Attack",0.853
+21/03/2025 13:27:50,36,"FIN Flag Suspiciously High, FIN Scans",0.21688159437280188
+21/03/2025 13:27:50,36,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:27:50,36,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:27:50,36,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.030541408318756125
+21/03/2025 13:27:52,37,"Packet Rate Suspiciously Low, Possible DoS",0.018412797676827523
+21/03/2025 13:27:52,37,"Window Time Length Suspiciously High, Possible Slow Drip",769.0692992331867
+21/03/2025 13:27:52,37,"Mean Time Between Packets Suspiciously Low, Possible DoS",0.0013015745161054609
+21/03/2025 13:27:52,37,"TCP Traffic Suspiciously High, Possible TCP Attack",0.828
+21/03/2025 13:27:52,37,"FIN Flag Suspiciously High, FIN Scans",0.20531400966183574
+21/03/2025 13:27:52,37,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:27:52,37,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:27:52,37,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.111315
+21/03/2025 13:27:52,37,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.030156964791790353
+21/03/2025 13:27:53,38,"Window Time Length Suspiciously High, Possible Slow Drip",658.799344326977
+21/03/2025 13:27:53,38,"Standard Deviation Time Between Packets Suspiciously Low, Possible DoS",0.0015194322969820406
+21/03/2025 13:27:53,38,"TCP Traffic Suspiciously High, Possible TCP Attack",0.839
+21/03/2025 13:27:53,38,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:27:53,38,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:27:53,38,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.128996
+21/03/2025 13:27:53,38,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.03975292161845595
+21/03/2025 13:27:55,39,"Packet Rate Suspiciously Low, Possible DoS",0.002034753650516361
+21/03/2025 13:27:55,39,"TCP Traffic Suspiciously High, Possible TCP Attack",0.842
+21/03/2025 13:27:55,39,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:27:55,39,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:27:55,39,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.118044
+21/03/2025 13:27:55,39,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.03934984493616207
+21/03/2025 13:27:56,40,"Packet Rate Suspiciously Low, Possible DoS",0.01627045699070445
+21/03/2025 13:27:56,40,"Mean Time Between Packets Suspiciously Low, Possible DoS",0.001425116150467484
+21/03/2025 13:27:56,40,"TCP Traffic Suspiciously High, Possible TCP Attack",0.867
+21/03/2025 13:27:56,40,"FIN Flag Suspiciously High, FIN Scans",0.2179930795847751
+21/03/2025 13:27:56,40,"Modbus Code Other High, Possible Modbus Attack",1.0
+21/03/2025 13:27:56,40,"Modbus Register 0 High, Possible Modbus Attack",1.0
+21/03/2025 13:27:56,40,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.306766
+21/03/2025 13:27:56,40,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.051533734597530606
+24/03/2025 13:48:23,18,"Unknown IP Count Suspiciously High, Possible MITM",9
+24/03/2025 13:48:27,21,"Modbus Code Other High, Possible Modbus Attack",1.0
+24/03/2025 13:48:27,21,"Modbus Register 0 High, Possible Modbus Attack",1.0
+24/03/2025 13:48:27,21,"Modbus Register 3 High, Possible flood on Register ",1.0
+24/03/2025 13:48:29,22,"Modbus Code Other High, Possible Modbus Attack",1.0
+24/03/2025 13:48:29,22,"Modbus Register 0 High, Possible Modbus Attack",1.0
+24/03/2025 13:48:29,22,"Modbus Register 3 High, Possible flood on Register ",1.0
+24/03/2025 13:48:30,23,"Modbus Code Other High, Possible Modbus Attack",1.0
+24/03/2025 13:48:30,23,"Modbus Register 0 High, Possible Modbus Attack",1.0
+24/03/2025 13:48:30,23,"Modbus Register 3 High, Possible flood on Register ",1.0
+24/03/2025 13:48:32,24,"Packet Rate Suspiciously Low, Possible DoS",0.016404021485321333
+24/03/2025 13:48:32,24,"Mean Time Between Packets Suspiciously Low, Possible DoS",0.001305769871663045
+24/03/2025 13:48:32,24,"TCP Traffic Suspiciously High, Possible TCP Attack",0.832
+24/03/2025 13:48:32,24,"FIN Flag Suspiciously High, FIN Scans",0.21754807692307693
+24/03/2025 13:48:32,24,"Modbus Code Other High, Possible Modbus Attack",1.0
+24/03/2025 13:48:32,24,"Modbus Register 0 High, Possible Modbus Attack",1.0
+24/03/2025 13:48:32,24,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.318018
+24/03/2025 13:48:32,24,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.04378812616081757
+24/03/2025 13:48:34,25,"Window Time Length Suspiciously High, Possible Slow Drip",874.9648234979243
+24/03/2025 13:48:34,25,"Mean Time Between Packets Suspiciously Low, Possible DoS",0.009650576469836991
+24/03/2025 13:48:34,25,"Standard Deviation Time Between Packets Suspiciously Low, Possible DoS",0.0011440471366599755
+24/03/2025 13:48:34,25,"TCP Traffic Suspiciously High, Possible TCP Attack",0.845
+24/03/2025 13:48:34,25,"Modbus Code Other High, Possible Modbus Attack",1.0
+24/03/2025 13:48:34,25,"Modbus Register 0 High, Possible Modbus Attack",1.0
+24/03/2025 13:48:34,25,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.113331
+24/03/2025 13:48:34,25,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.026103888113340145
+24/03/2025 13:48:35,26,"Packet Rate Suspiciously Low, Possible DoS",0.012137676708387692
+24/03/2025 13:48:35,26,"Standard Deviation Time Between Packets Suspiciously Low, Possible DoS",0.001285265396545838
+24/03/2025 13:48:35,26,"TCP Traffic Suspiciously High, Possible TCP Attack",0.854
+24/03/2025 13:48:35,26,"Modbus Code Other High, Possible Modbus Attack",1.0
+24/03/2025 13:48:35,26,"Modbus Register 0 High, Possible Modbus Attack",1.0
+24/03/2025 13:48:35,26,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.121575
+24/03/2025 13:48:35,26,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.03395648529477204
+24/03/2025 13:48:37,27,"Window Time Length Suspiciously Low, Possible DoS",0.0011947508211489076
+24/03/2025 13:48:37,27,"TCP Traffic Suspiciously High, Possible TCP Attack",0.879
+24/03/2025 13:48:37,27,"FIN Flag Suspiciously High, FIN Scans",0.23321956769055746
+24/03/2025 13:48:37,27,"Modbus Code Other High, Possible Modbus Attack",1.0
+24/03/2025 13:48:37,27,"Modbus Register 0 High, Possible Modbus Attack",1.0
+24/03/2025 13:48:37,27,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.135115
+24/03/2025 13:48:37,27,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.037114470644782724
+24/03/2025 13:48:38,28,"Packet Rate Suspiciously Low, Possible DoS",0.0013320388736667577
+24/03/2025 13:48:38,28,"TCP Traffic Suspiciously High, Possible TCP Attack",0.864
+24/03/2025 13:48:38,28,"Modbus Code Other High, Possible Modbus Attack",1.0
+24/03/2025 13:48:38,28,"Modbus Register 0 High, Possible Modbus Attack",1.0
+24/03/2025 13:48:38,28,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.109373
+24/03/2025 13:48:38,28,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.03103597533907224
+24/03/2025 13:48:40,29,"Packet Rate Suspiciously Low, Possible DoS",0.01614928587399649
+24/03/2025 13:48:40,29,"Standard Deviation Time Between Packets Suspiciously Low, Possible DoS",0.0014009349219672553
+24/03/2025 13:48:40,29,"TCP Traffic Suspiciously High, Possible TCP Attack",0.871
+24/03/2025 13:48:40,29,"FIN Flag Suspiciously High, FIN Scans",0.21699196326061998
+24/03/2025 13:48:40,29,"Modbus Code Other High, Possible Modbus Attack",1.0
+24/03/2025 13:48:40,29,"Modbus Register 0 High, Possible Modbus Attack",1.0
+24/03/2025 13:48:40,29,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.134421
+24/03/2025 13:48:40,29,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.030419718659891296
+24/03/2025 13:48:42,30,"Packet Rate Suspiciously Low, Possible DoS",0.002102389349951758
+24/03/2025 13:48:42,30,"TCP Traffic Suspiciously High, Possible TCP Attack",0.856
+24/03/2025 13:48:42,30,"Modbus Code Other High, Possible Modbus Attack",1.0
+24/03/2025 13:48:42,30,"Modbus Register 0 High, Possible Modbus Attack",1.0
+24/03/2025 13:48:42,30,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.168599
+24/03/2025 13:48:42,30,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.04733643681328135
+24/03/2025 13:48:43,31,"Standard Deviation Time Between Packets Suspiciously Low, Possible DoS",0.001168048894918478
+24/03/2025 13:48:43,31,"TCP Traffic Suspiciously High, Possible TCP Attack",0.836
+24/03/2025 13:48:43,31,"FIN Flag Suspiciously High, FIN Scans",0.22248803827751196
+24/03/2025 13:48:43,31,"Modbus Code Other High, Possible Modbus Attack",1.0
+24/03/2025 13:48:43,31,"Modbus Register 0 High, Possible Modbus Attack",1.0
+24/03/2025 13:48:43,31,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.025236209586944964
+24/03/2025 13:48:46,32,"Packet Rate Suspiciously Low, Possible DoS",0.0013873531773045018
+24/03/2025 13:48:46,32,"Window Time Length Suspiciously High, Possible Slow Drip",721.5185126442374
+24/03/2025 13:48:46,32,"TCP Traffic Suspiciously High, Possible TCP Attack",0.821
+24/03/2025 13:48:46,32,"FIN Flag Suspiciously High, FIN Scans",0.22168087697929353
+24/03/2025 13:48:46,32,"Modbus Code Other High, Possible Modbus Attack",1.0
+24/03/2025 13:48:46,32,"Modbus Register 0 High, Possible Modbus Attack",1.0
+24/03/2025 13:48:46,32,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.124071
+24/03/2025 13:48:46,32,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.03434832473291346
+24/03/2025 13:48:47,33,"Window Time Length Suspiciously Low, Possible DoS",0.0013791720072428386
+24/03/2025 13:48:47,33,"TCP Traffic Suspiciously High, Possible TCP Attack",0.91
+24/03/2025 13:48:47,33,"Modbus Code Other High, Possible Modbus Attack",1.0
+24/03/2025 13:48:47,33,"Modbus Register 0 High, Possible Modbus Attack",1.0
+24/03/2025 13:48:47,33,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.133708
+24/03/2025 13:48:47,33,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.03735132098052223
+24/03/2025 13:48:49,34,"Packet Rate Suspiciously Low, Possible DoS",0.031947408832568594
+24/03/2025 13:48:49,34,"Mean Time Between Packets Suspiciously Low, Possible DoS",0.0020533903941019876
+24/03/2025 13:48:49,34,"TCP Traffic Suspiciously High, Possible TCP Attack",0.817
+24/03/2025 13:48:49,34,"FIN Flag Suspiciously High, FIN Scans",0.23133414932680538
+24/03/2025 13:48:49,34,"Modbus Code Other High, Possible Modbus Attack",1.0
+24/03/2025 13:48:49,34,"Modbus Register 0 High, Possible Modbus Attack",1.0
+24/03/2025 13:48:49,34,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.023558777450639286
+24/03/2025 13:48:51,35,"Packet Rate Suspiciously Low, Possible DoS",0.001385225309385313
+24/03/2025 13:48:51,35,"TCP Traffic Suspiciously High, Possible TCP Attack",0.862
+24/03/2025 13:48:51,35,"FIN Flag Suspiciously High, FIN Scans",0.2088167053364269
+24/03/2025 13:48:51,35,"Modbus Code Other High, Possible Modbus Attack",1.0
+24/03/2025 13:48:51,35,"Modbus Register 0 High, Possible Modbus Attack",1.0
+24/03/2025 13:48:51,35,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.120926
+24/03/2025 13:48:51,35,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.026520438845619734
+24/03/2025 13:48:53,36,"Packet Rate Suspiciously Low, Possible DoS",0.0011274573561904189
+24/03/2025 13:48:53,36,"TCP Traffic Suspiciously High, Possible TCP Attack",0.853
+24/03/2025 13:48:53,36,"FIN Flag Suspiciously High, FIN Scans",0.21688159437280188
+24/03/2025 13:48:53,36,"Modbus Code Other High, Possible Modbus Attack",1.0
+24/03/2025 13:48:53,36,"Modbus Register 0 High, Possible Modbus Attack",1.0
+24/03/2025 13:48:53,36,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.030541408318756125
+24/03/2025 13:48:55,37,"Packet Rate Suspiciously Low, Possible DoS",0.018412797676827523
+24/03/2025 13:48:55,37,"Window Time Length Suspiciously High, Possible Slow Drip",769.0692992331867
+24/03/2025 13:48:55,37,"Mean Time Between Packets Suspiciously Low, Possible DoS",0.0013015745161054609
+24/03/2025 13:48:55,37,"TCP Traffic Suspiciously High, Possible TCP Attack",0.828
+24/03/2025 13:48:55,37,"FIN Flag Suspiciously High, FIN Scans",0.20531400966183574
+24/03/2025 13:48:55,37,"Modbus Code Other High, Possible Modbus Attack",1.0
+24/03/2025 13:48:55,37,"Modbus Register 0 High, Possible Modbus Attack",1.0
+24/03/2025 13:48:55,37,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.111315
+24/03/2025 13:48:55,37,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.030156964791790353
+24/03/2025 13:48:57,38,"Window Time Length Suspiciously High, Possible Slow Drip",658.799344326977
+24/03/2025 13:48:57,38,"Standard Deviation Time Between Packets Suspiciously Low, Possible DoS",0.0015194322969820406
+24/03/2025 13:48:57,38,"TCP Traffic Suspiciously High, Possible TCP Attack",0.839
+24/03/2025 13:48:57,38,"Modbus Code Other High, Possible Modbus Attack",1.0
+24/03/2025 13:48:57,38,"Modbus Register 0 High, Possible Modbus Attack",1.0
+24/03/2025 13:48:57,38,"Modbus Max Response Time Suspiciously High, Possible Slow Drip",0.128996
+24/03/2025 13:48:57,38,"Modbus Deviation Response Time Suspiciously High, Possible Slow Drip",0.03975292161845595
+24/03/2025 13:49:28,18,"Unknown IP Count Suspiciously High, Possible MITM",9
+24/03/2025 13:54:01,18,"Unknown IP Count Suspiciously High, Possible MITM",9
+24/03/2025 13:54:44,18,"Unknown IP Count Suspiciously High, Possible MITM",9
+24/03/2025 13:55:32,54,"Modbus Code Other High, Possible Modbus Attack",1.0
+24/03/2025 13:55:32,54,"Modbus Register 0 High, Possible Modbus Attack",1.0
+24/03/2025 13:55:32,54,"Modbus Register 3 High, Possible flood on Register ",1.0
+24/03/2025 13:55:34,55,"Unknown IP Count Suspiciously High, Possible MITM",9
+24/03/2025 13:55:34,55,"Modbus Read Write Ratio Suspiciously High, Possible Modbus Attack",0.176056338028169

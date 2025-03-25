@@ -1,13 +1,14 @@
 import unittest
 import ReadData as ReadData
 
-class TestPacket(unittest.TestCase):
-    def test_getInterfaces(self):
-        interfaces = ReadData.getInterfaces()
-        print(interfaces)
-        for each in interfaces:
-            if each == 'en0':
-                self.assertTrue(True)
-            
+
+
+def test_readData():
+    # Test readData function
+    data = ReadData.readData()
+    assert data.shape[0] == 1000
+    
+
+
 if __name__ == '__main__':
     unittest.main()

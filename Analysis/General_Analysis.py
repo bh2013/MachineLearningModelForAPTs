@@ -71,13 +71,8 @@ def packetRate(window):
     meanTimeDifferencePerPacket = np.mean(diffInTimeBetweenPackets)
     standardDeviationBetweenPackets = np.std(diffInTimeBetweenPackets)
     
-    # # calculate entrop of the time between packets
-    historgram, bin_edge = np.histogram(diffInTimeBetweenPackets, bins = 10, density=True)
-    historgram = historgram/np.sum(historgram)
-    historgram = historgram[historgram >0]
 
     
-  
 
     if durationOfWidnow == 0:
         return len(window)

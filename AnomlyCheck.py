@@ -1,10 +1,11 @@
 
-import os
-import numpy as np
 
 import FormatData
 import csv 
 from datetime import datetime
+            
+import pandas as pd
+import matplotlib.pyplot as plt
 
 avg = [
     67.50595000000001, 
@@ -414,6 +415,9 @@ def FlagCheck(Fin, SYN, RST, PSH, Ack, URG, ECE, CWR):
     if PSH > 0.6:
         anomalies.append(("PSH Flag Suspiciously High, Possible PSH Flood", PSH))
         
+    if PSH > 0.5 and Ack > 0.5:
+        anomalies.append(("Suspicious Combination of Flags, Possible MITM", 0))
+        
     if Fin > 0.1 and PSH > 0.1 and URG >0.02:
         anomalies.append(("Suspicious Combination of Flags, Possible XMas Scan", 0))
     
@@ -496,10 +500,10 @@ def protocolCheck(ARP, DATA, DNS, ICMP, MODBUS, S7COMM, TCP, Unkown):
     if TCP > 0.75:
         anomalies.append(("TCP Traffic Suspiciously High, Possible TCP Attack", TCP))
     if Unkown > 0.2:
-        anomalies.append(("Unkown Traffic Suspiciously High", Unkown))
+        anomalies.append(("Unkown Traffic Suspiciously High, possible malicious attack", Unkown))
         
 def unkownIpCountCheck(unkownIpCount):
-    if unkownIpCount > 10:
+    if unkownIpCount > 8:
         anomalies.append(("Unknown IP Count Suspiciously High, Possible MITM", unkownIpCount))
 
 # !-------Display Anomalies & exporting -------!
@@ -520,7 +524,7 @@ def displayAnomalies():
     
 def exportToCsv():
     global windowCountGlobal, anomalies
-    fileName = "DataLogs/DataLog.csv"
+    fileName = "DataLogs/DataLogFlood.csv"
     
     with open(fileName, mode='a') as file:
         writer = csv.writer(file)
@@ -531,3 +535,4 @@ def exportToCsv():
         
         for anomaly, value in anomalies:
             writer.writerow([timestamp, windowCountGlobal, anomaly, value])
+        

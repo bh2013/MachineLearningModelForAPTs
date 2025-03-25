@@ -1,11 +1,7 @@
 def S7_Packet(packetInfo, pkt):
     try:
         packetInfo["Function"] = str(pkt.S7COMM.header_protid)
-
         packetInfo["Destination"] = pkt.ip.dst
-        
-
-        
     except Exception as e:
         print("ErrorInS7Packet: " + str(e))
     return packetInfo
